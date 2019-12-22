@@ -1,0 +1,1004 @@
+* Note that:this file for notify todo thing,just notify,if want do memo of development,write in 'readme'
+
+//2018年 9月16日 星期日 12时26分59秒 CST
+//Inch13Early2015Air
+  
+
+
+
+Inch13Early2015Air
+2018年 9月16日 星期日 12时27分39秒 CST
+  make a route - "tricks"
+  sub include /tricks/write,/tricks/read/1(or n)
+  for short of them,currently no conside 'del' or 'update'
+
+  template,views
+  views/tricks/  -- root directory of route - tricks
+
+cyrus-Latitude-E7470
+2018年 09月 17日 星期一 08:58:50 CST
+  continue write '/tricks/write',first need a module/tricks.schema.js,it defines all properties and methods. 
+  
+cyrus-Latitude-E7470
+2018年 09月 17日 星期一 09:04:20 CST
+  renamed coffees/md-schema.coffee and its production(.js) to 'sche-tricks.xxx',because new name examactly maps real thing.
+
+
+Inch13Early2015Air
+2018年 9月18日 星期二 15时21分12秒 CST
+  learn find,load,loadMany,update?,exists.
+
+Inch13Early2015Air
+2018年10月 8日 星期一 16时12分49秒 CST
+  ajax method -- $.ajax {options}
+  the {options} attribute -- data,useful for collection of form-datas,via $('<somespecial>').serialize()  -- no arguments in serialize() method.
+  at the server side,(app.js) has snippet:
+  app.use express.urlencoded {extends:fasle}   # no need include bodyParser again(example:bodyParser = require 'bodyParser').
+  Note that:
+    if one form has same attribute name,in case,we say 'visits',first element is <input type="number" name="visits".....>,then dynimactlly include another element -- <input type="number" name="visits"....>
+    at last,the server gets body.visits = ['value-one','value-two']
+
+jp-stretch-pi-2
+Mon Oct  8 16:49:34 CST 2018
+  button now near the down side of page ,add1 button now looks better.
+
+Inch13Early2015Air
+2018年10月10日 星期三 09时39分16秒 CST
+  from here start to think about module event,task.
+  after submitting data(fields),server start to parsing them ,populated to correctly table(in redis,say "key-value",hash key).
+  single form occurs 
+
+cyrus-Latitude-E7470
+2018年 10月 10日 星期三 10:59:56 CST
+  make an insstance about how-express-redirect-a-page.
+
+cyrus-Latitude-E7470
+2018年 10月 10日 星期三 16:10:28 CST
+  replace the fake "come-back-to-front-page" button,need a solid nav menu.
+
+Inch13Early2015Air
+2018年10月30日 星期二 15时13分31秒 CST
+  use bootstrap's alert box replace  populating to  div element
+
+cyrus-Latitude-E7470
+2018年 10月 31日 星期三 10:13:32 CST
+  give a route '/tricks/list' as index page
+
+Inch13Early2015Air
+2018年10月31日 星期三 22时53分21秒 CST
+  route : /tricks
+  client visit index page at /tricks,they can see an accordion design,the top 10 or something list as panel:has title has scalable panel body,click any one triggers collapse else thing which now is spanding.
+  if the content is long,just first 10 lines be displayed,at the panel body's end has '...' sybol,means can continue click to get full text.
+  so,index page have not many ajax events,server-side provides almost all,if client click '...'(button),redirect to detail page of this item.
+
+Inch13Early2015Air
+2018年10月31日 星期三 23时13分02秒 CST
+  refine the model-accordion view,let is driven by for ... each structure.
+  find().lessthan(20)
+  the first article(panel) sprand.
+  delete non nessary,cause fusing files.
+
+  need a place do practices about nohm.find(),try...catch await...these things.
+
+Inch13Early2015Air
+2018年11月 7日 星期三 07时31分28秒 CST
+  details page provides html parse ability.say,before put in db,writter can use html tag,like '<p>','<h1>'...,db store them,retrieved html page --- detail page ---- can render them as before.
+  before it,detail page really render filed content's content.
+
+Inch13Early2015Air
+2018年11月 7日 星期三 10时37分12秒 CST
+  filter input
+  how-to,default has :db's html input(type='s and.. but content field can not block '|>| -|,|!...
+  learn and try ---- LAT ,no! it is really really be -- "TAL"(try and lean).
+  inner .js let user know which is dennny.
+
+hp505B
+Tue Nov 13 10:31:18 CST 2018
+  repair coffees/mine-createModal.coffee - /public/mine/mine-createModal.js
+
+cyrus-Latitude-E7470
+2018年 11月 14日 星期三 09:52:03 CST
+  add a route : /tricks/delete/:id
+  
+
+Inch13Early2015Air
+2018年11月16日 星期五 09时51分07秒 CST
+  update == ros db's classic update event,{'id':'solid1','aattr','solid this','var':'now changes.'} 
+  i thik ,find it -- id,then load it,then loaded.var = 'xxx'(new value).
+  if has better resolve?
+  a new instance/delte old id/save new one??
+  sounds more completule.complex.sounds more complexer.
+  lokk look for anmanual.hand book.
+
+Inch13Early2015Air
+2018年11月18日 星期日 10时24分41秒 CST
+  admin class,use test/
+  this admin class has members:
+  1,flag will migrates to 'version'
+  2,currently <Array>,use admin.register 'one class' will put the 'one class' into this array.
+  mothods:
+  1,mod2view
+  2,help func for mod2view.this help func will parse one object(opts),into a single bootstrap form element.i think it is the beginning of all class' methods whether it is member func or static class func.
+  the first test file at ./test/test-mod2view.js
+
+Inch13Early2015Air
+2018年11月19日 星期一 09时41分47秒 CST
+  need practice for saving items via new md-reading-journals.js
+  the module - 'md-admin-readingjourlnals' is not nessary,purge it.rewrite correcsponse test file.
+
+cyrus-Latitude-E7470
+2018年 11月 19日 星期一 13:26:19 CST
+  continue automatically.
+
+cyrus-Latitude-E7470
+2018年 11月 21日 星期三 08:43:51 CST
+  route - readingjournals : save,delete,update(re-save),find.
+Inch13Early2015Air
+2018年11月21日 星期三 22时33分16秒 CST
+  page list add delete option,via 'ajax'.
+
+cyrus-Latitude-E7470
+2018年 11月 22日 星期四 23:42:32 CST
+  find,/regexp/ find,text search.
+
+cyrus-Latitude-E7470
+2018年 11月 23日 星期五 10:22:20 CST
+  the index page need a hero-block in toppest position,contains:title,label,logo,picture,be rendering text(half clearly).
+
+
+hp505B
+Tue Nov 27 15:50:00 CST 2018
+  run the first socket.io learning-target-server.
+  why io-client cannot received data from io-server news channel,.emit {item:xxx??
+
+Inch13Early2015Air
+2018年12月10日 星期一 14时38分49秒 CST
+  review nohm
+  create a class file (module)
+  use this module,do initial about nohm,client
+  check insert 1,000 item how fast is it.
+  module name - 'idcards' keep staff's personal id number,inner-use.
+  filename: md-idcards.js,from coffees/md-idcards.coffee
+
+
+
+Inch13Early2015Air
+2018年12月12日 星期三 16时10分47秒 CST
+  sqlite3 is funny,easy,so,it is the time use it build one route,.....- --- "abbr",abbr is abbr,for us,one title(or key),references one full text ,content,we use do something or avoid something.
+  the route -- /abbr,the defined way call it "glossary"
+  decided:
+  route:/glossary
+  views:views/glossary.pug
+  pagejs:
+  minejs:
+  module:md-gloassary.
+  B.T.W,how sqlite treat module / schema as what? reqwuire 'sche-What',i see,'as a string.'defineition.
+
+cyrus-Latitude-E7470
+2018年 12月 17日 星期一 23:43:55 CST
+  now i knew module 'node-querystring' is not nessary import,because req.query can access this query obj,client ajax send 'q=ok&x=1',server's request object has attribute - query - {'q':'ok','x':'1'}.
+  need implement route glossary method (post) search.
+  view - index.pug
+  module - md-glossary.js
+  route - glossary/index 
+  index.pug has a search form,ajax form,while submit,trigger $.ajax {url:glossary/earch}
+  let server response query item of table glossary.then render this item to 'item.pug'
+
+Inch13Early2015Air
+2018年12月18日 星期二 12时27分46秒 CST
+  implement item:search
+
+Inch13Early2015Air
+2018年12月19日 星期三 08时49分55秒 CST
+  思考关于数据库文本类型域的查找问题。如何使用正则来查找？到目前为止，看到的SQLITE3和REDIS，都只能“恰当”匹配，无法正则匹配。在SQLITE3里，需要服务器额外安装正则库，并在脚本中先注册REGEXP方法，很是麻烦，而REDIS更弱。
+  今天，似乎是一个适合做些突破的日子，从建一个“小区车辆登记”的APP开始吧。
+  用REDIS及NOHM，做一个MODULE，比之前REDIS应用更进一步的是，这个MODULE有一个方法----CREATEFORM（），可以被客户端显示代码（VIEW）重复利用，显示一个包含必要域的表单，以AJAX方式与后台交互。
+  对已有数据检索的能力。
+  检索时，关键词主要是两类，一类是号牌模糊搜索词如“A2?B”，另一类是厂牌，如：TOKYO。这是如何做到的呢？主要说模糊这类吧，纯REDIS-CLI，可以使用KEYS来匹配。NOHM没有。
+
+hp505B
+Tue Dec 25 16:45:01 CST 2018
+  share/behaviour.cofffee and share/mod2form.coffee not complete.
+
+Inch13Early2015Air
+2019年 1月 4日 星期五 09时32分16秒 CST
+  practice of bootstrap's suit - navbar media medialist.
+
+cyrus-Latitude-E7470
+2019年 01月 09日 星期三 10:11:07 CST
+  邻家车子，这个APP算是走了一半，昨天在苹果机上完成了顶部导航条的工作，算算“增、删、改、查”，还需要独个删除的功能。latitude 可以完成这个。 
+  但是，之前要解决“在列表中提供功能按钮”的问题。 
+
+Inch13Early2015Air
+2019年 1月10日 星期四 10时04分07秒 CST
+  初步调通了两个按钮：DELETE和PUT，进一步。
+
+jp-stretch-pi-2
+Wed Jan 16 10:17:51 CST 2019
+  list page: full of td in one table.the td i slisteners.they on click fter after the event occurs,they trigger only this one <td> \s class remove class list remove the .disable class,and itno....no.
+  i thought about this,the td just loook like a td,but in fact it is a input ele.default(no click update button,edit button),it is just input.disabled,let inmediially ssee see what is like.?
+
+cyrus-Latitude-E7470
+2019年 01月 16日 星期三 16:09:31 CST
+  after wrote a mocha functional test - coffees/ft-neighborCar-list.coffee,i knew the time is arrived that let redis-server alone,app.js will no regress that it can startup redis-server,instead,it checks and reports if redis-server is ready as a env .
+  todo:1,re-write app.js,remove the startup codes,includes 'linux' conf and 'darwin' conf,add checks,check if redis-server is running,and use the correctly conf,so,redis-server must has a flag string:redis-cli set correctly 'linux:darwin:arm',the final resolve way is gulp script.
+  todo:2,if app.js check the redis-server is not running,it warns in console.log and html-client-page,via session-cookie.
+  todo:3,if redis-server running at wrong redis database(not within ./redisdb/),show warnings too.
+
+jp-stretch-pi-2
+Mon Feb 18 20:13:35 CST 2019
+  want to build a socketio-standlone server ,the common html server's client can connect to it.
+
+jp-stretch-pi-2
+Mon Feb 18 21:42:24 CST 2019
+  the view - views/3rdhello.pug and server coffees/io-3rd-hello-server.coffee值得学习这个正是要的独立IO服务器的例子。 
+
+jp-stretch-pi-2
+Wed Feb 20 09:46:40 CST 2019
+  当前要解决的两个问题是日期戳和update路径
+
+jp-stretch-pi-2
+Sun Feb 24 19:00:52 CST 2019
+  resolve the crypt problem.
+
+cyrus-Latitude-E7470
+2019年 02月 25日 星期一 18:23:06 CST
+  user login /user-daka page,and admin login /admin-daka page.the 2 pages all has its 'io' variable which connected io server.
+  
+
+cyrus-Latitude-E7470
+2019年 02月 25日 星期一 21:17:35 CST
+  mess tonight,because big daughter and this app became mess.user's accounts in one table ,the table structor as admin user's accounts,but it is difference prority,from difference table,get difference prority,power.2 tables has same structor or let us say almost same.admin accounts table {id,name,password,code,initial_timestamp},user accounts table {id,name,password,code,initial_timestamp}
+  the first time admin/user login,the table is exists already,from a script name init2tables.let us refine it soon.
+  //this script entablishes 2 tables,has 1 or serial admins(if need),and numbers of users(as number of stuffs),
+  need a register route '/register/admin','/register/user',the 'super user' can add admin(s),and admin can add common user(s).owns a super key will act as 'super user'.the super key from <project>/crediential.txt.
+  this is the way resolved 'di yi tui dong'.
+ 
+
+jp-stretch-pi-2
+Tue Feb 26 14:33:10 CST 2019
+  how to prove i am super user?
+  login in in one page,it is form infact,fill account:password,then tell you right or not.
+
+jp-stretch-pi-2
+Tue Feb 26 15:19:13 CST 2019
+  now has a page authenticate the super user,but in level of session,no changes,need fix it.
+
+jp-stretch-pi-2
+Wed Feb 27 10:22:12 CST 2019
+  change all login routes to <role>/login,example:
+  (original)fill-account -> user/fill-account
+  currently,most route need changes.
+
+Inch13Early2015Air
+2019年 2月28日 星期四 09时58分16秒 CST
+  为避免过早优化，我可以容忍get '/superuser/login'里不使用modal.
+
+DailyPi3
+2019年 02月 28日 星期四 16:42:55 CST
+  接下来应该是核心业务了：使用SOCKETIO,进行打卡和动态监控。主要涉及两类角色(role),admin and user,admin can listen user login,user dakaing,user dakaed,the most important thing is give user special socket a grphic for login in.need an inter-view pohot?
+  1,user page /user/daka,pagejs let this page has 2 listener .qrready(qrcode is ready now),and .loginover
+  2,admin page /admin/daka,pagejs let this page has  2 listener. one is ".provide-now",second is "qrcode-timeout"
+  3,on .connect ,user emit 'requery qrcode',server heard it,then .of 'admin-channel'.emit 'provide-now',
+  4,admin page will check auth.role attribute, trigger to display qrcode.I
+
+jp-stretch-pi-2
+Fri Mar  1 10:57:34 CST 2019
+  let us step into socketio world!
+  /usre/daka page is the first place we listen-trigger business-socket .
+
+Inch13Early2015Air
+2019年 3月 1日 星期五 15时04分55秒 CST
+  want to resolve navigating problem,when user directly browser to '/user/daka' but has no session about auth.role,server let it login as user first,usually,give a response show it is successfully.but server can not browser to '/user/daka',it leaves user do it,it is a no good exprereince.i should resovlve it ti=hthis afternoon.
+
+Inch13Early2015Air
+2019年 3月 3日 星期日 16时16分18秒 CST
+  /admin(user)/logout access method from GET to put.
+  think about which route will browser(redirect) to logout?
+  oh yes,the main useful is in site:first page.
+  so,it is harmless for build(rebuild) index route.
+
+Inch13Early2015Air
+2019年 3月 4日 星期一 08时39分36秒 CST
+  qu da zheng.
+  the first page,contains a picture,feather,special-write,and a form
+  index page has 4 links,the 'logout' link to ajax put.
+  user daka ,admin daka 2 buttons,display role state,give a shortcuts login.
+  The Index Page Also Have plenty details to fixes.
+
+Inch13Early2015Air
+2019年 3月 4日 星期一 16时42分41秒 CST
+  与之前比起来，都是小事，现在要真正地去使用SOCKETIO，发起打卡请求，让有ADMIN权限的BROWSER，画出QR码，并由系统通知每个终端：“可以去前台打卡扫码了。”
+  需要做的不少，真正要解决的技术环节是：
+  一，如何以一个伪随机字串，生成不事的QRCODE？
+  二，如何给一个QRCODE设置时效，比如一分钟内？
+  三，ADMIN和USER的SESSION时效如何管理，比如对一个USER有疑问，如何给它一个DISABLE属性？
+  。。。。
+  还是先做最容易的吧！？。。。
+  但是，最激动人心的，还是想搞通那个USER-》SERVER-》ADMIN的推送场颢！这就需要久约定一下各自的角色，行为，也就是像拍电影一样，需要一个剧本了。
+  script:
+  roles:A,a user,name is 'noeasy,its password is '123';B,admin,name is 'fool',password:'1234567',its password is default,no change,so each time 'fool' in site's index page,it be warning :'change your password immedaiately.';C,the socket.io server side ,name : 'io',io has 2 channel,'/admin',and '/user',io can connect all roles(instances) via these 2 channel,example:io.of('/admin').emit('onething','command1 about onething'),then admin in browser heard that,according to codes in pagejs,admin pull some data from server,and inform user via admin.emit 'inform-user','composed-data',this for server's io,io transform and at last give message to users which they request at first time.(sketch)
+  detail-script(version II)
+  roles:A,B,C obey above sketch version.
+  events:
+    User noeasy(A,from here ignores intro) want daka,he visit site's first page /index,he saw there are 2 main Link,1 for admin,1 for user,he clicked the user link.
+    in the daka page:noeasy be leaded to clicked the button 'start DaKa',after clicked,pagejs emit an event:req-qr-code,as it name said,noeasy requery to server(admin) he want a qrcode.
+    server heard that because io-server has scripts:io.of '/user .on 'req-qr-code','username:noeasy',server do some compose things,add timestamp and <username:noeasy>,let them be a string.server also give a timeout to this string:1minute.
+    how server do above thing(s)?
+    i means main thing:give a timeout-limited-string to another?
+    via redis can do it naturally.redis.set 'one','one means do one thing.';redis.ttl 'one',60 # give 60secs,after the dead line,one is invisiable.
+    so,as i say,it is be more comprshenble,server make this special string,and let redis-server store it as a key,and add additional ttl time(secs).server side knew it.
+    server prepair anything,then emit to channel '/admin',server let all listenning admin(s),show a qrcode,its content is (example) : '/visit/user/special/daka/page?key=user:noeasy:timestamp:1500849999123:salt-string-affix'
+    ...
+    after sevieral tranforms,the user at last scan qrcode,qrcode to what?
+    response page is included in qrcode which written as 'http://host/visit/user/special/daka/page?key=...',let us say '/user/daka' page.
+    the page codes (fake):
+    app.get '/user/daka',(req,res)->
+      # pull info from redis db
+      ins = await accountModel.load <id> 
+      # if ins isnt undefined,say its life is still active.
+      obj = ins.allProperties()
+      
+     
+DailyPi3
+2019年 03月 07日 星期四 09:29:48 CST
+  <socket.id>:<user-alias-name>:<timestamp>
+  at route -- /usr/daka-response (old name: /user/login-response)
+
+cyrus-Latitude-E7470
+2019年 03月 08日 星期五 09:54:44 CST
+  index page,simple and incorrectly,the feather should focus to 'daka',2 role,a stats info,maybe need a nav-bar,staticise,main ,plenty of block should be dialogure box,a fluidiable,small banner give some correseponse article,lib,skillful,notices...colorfully,has some animalable,..
+  at server side ,need alyzler route,staticifixs of one special name(alias),display,totaling,this man's daka items ,sortable,and could sort by aesc,des-aesc,a range of dates,has a friendly share way,download,qrcode,mail?
+  again,i try to explain what is 'socket'.
+  from currently project,i use socket.io 2 channels,1 is admin-group,2,is user-group,they are all base on session's auth object.
+  admin-group defined at server side,its 'on connect' event,accept a callback function,this function's argument,is 'socket'.problem one:"this socket stand on which side?server or client(browser)?";problem two:what things it can handle?
+  anwer 1 : the codes about socket,socket events,all in server side,its id is identified at server side and client side.so ,the more aglyily mind is "the socket acts server side and client side,anytime put message into one side the other side will see it."
+  problem two answer:socket.on socket.emit,notice that only 'socket.on',if defined admin-group.on is nosense
+
+Inch13Early2015Air
+2019年 3月 8日 星期五 11时28分47秒 CST
+  how to limit clients concurrently request admin display qrcode,i means ,one person request first,and concu another person immedialy request qrcode whild the first one hasnt full time to scan-and-brower.when the first man doing the qrcode is not present its alias id.
+
+Inch13Early2015Air
+2019年 3月 9日 星期六 09时03分25秒 CST
+  help function - timediff(one,two)-> adjustment one >= two return one
+
+  tooEarly(),how to resolve utc cst difference,
+  utc 23 == cst 7(-8)
+  so,am in cst is: 
+  
+  8 0 # 24
+  7 23 
+  6 22  #22 + 8 = 22 +2 + 6 = 0 + 6 
+  5 21
+  4 20
+  if getHour < 20 and getHour() >  
+
+Inch13Early2015Air
+2019年 3月10日 星期日 07时32分42秒 CST
+  resolve the inRange() problem,it works,but has dobout that:if it is really userful denny someone later commit his daka?in common scanoior,always has somebody need record when he came and when he leave.so daka really means 'come and go'.
+  so,the underlying problem is :give a toggle-mechanism to person daka event,one click daka button,he is in 'have come and not go out' staus,we call this simple as "first click","first click " expecting second click.the last click daka rely on current time,if time is in 'am',we ensure this person forgot daka when he go out yesterday afternoon,so this click,we think it as first-click,expecting second-click.
+  need 2 things:1,change inRange to isFirst(),isSecond().
+  2,in model of redis db,add one field:pairing,pairing is boolean type.if one click button,server said 'it is first click',the one after a short time,click again,server check db,know this is not second click,server tell that 'dont commit again'.so,how could io socket connect db.
+Inch13Early2015Air
+2019年 3月10日 星期日 13时07分17秒 CST
+  mami and daddy from GuangDong to home.arrived at 10:55 am,wuchang railway station.
+  in app.js(the main codes),set up redis as app.redis,so include app module,redis is available.check if it is true.
+Inch13Early2015Air
+2019年 3月11日 星期一 09时00分07秒 CST
+  finish firstClick()
+
+jp-stretch-pi-2
+Tue Mar 12 10:33:34 CST 2019
+  i think firstClick() and like-it methods,no need defined at socketio server side,just give a route to socket server.
+  if i need recently one user's records,ajax query to /user/recently-10-days/,express will collect all needness and call redis api,at last,give a json obj to this socketio rquest.
+  so,i reset --hard to HEAD~2 disable some migiration like redis=app.redis=(require 'redis').createClient()
+
+jp-stretch-pi-2
+Tue Mar 12 14:35:50 CST 2019
+  finish isFirstClick()
+
+jp-stretch-pi-2
+Tue Mar 12 16:59:07 CST 2019
+  in views/user-daka.pug,add one button,in one button group.1 is 'entry' button,2 is 'exit' button,anytime,only one is active,socketio server will absert which is active one.
+
+cyrus-Latitude-E7470
+2019年 03月 13日 星期三 10:54:00 CST
+  denny chong-fu-daka.
+  解决QR二维码配上ALIAS问题。
+
+jp-stretch-pi-2
+Wed Mar 13 16:18:34 CST 2019
+  qrcode picture(png) in view - views/admin-daka.pug,pagejs - public/mine/mine-admin-daka.js,
+  view,need split into 2 main box,top one named pngbox,bottom named messagebox or simplely msgbox.
+   
+Inch13Early2015Air
+2019年 3月14日 星期四 10时49分28秒 CST
+  admin can help user daka even after correctly time.give a route for it:'/admin/budaka/'
+  admin can retrieves all user items,sort by some field,collects by time range.
+  admin can give a gogo to user,when user be stuck at server's time or role.
+
+jp-stretch-pi-2
+Fri Mar 15 09:27:25 CST 2019
+  /admin/complement this route can handle :machine breakdown,outage,memory card destrory...or maybe a newbie forgot daka but she/he really done the work.
+admin fill one form about underlying fields,the forms also include a button "more",click this button cause a new form expanded.
+
+DailyPi3
+2019年 03月 15日 星期五 12:59:19 CST
+  implement 'checked' trigger .disabled.
+  implement 'more' func.
+
+DailyPi3
+2019年 03月 15日 星期五 14:26:13 CST
+  需要很高超的jQuery操纵元素技巧，才能处理动态插入，新表之类的问题。back to j602.
+
+Inch13Early2015Air
+2019年 3月17日 星期日 11时02分01秒 CST
+  configures---.config----is many than you thought,we need collect it into one singleton dir.
+  the admin page of daka app,need simple,remove diggoest infos,keep it cleaning,just display has/has not client(s),qrcode,for who?the step1 is over,last commit.
+  multiple forms in one page,ajax submit,durnig this time,how collects all datas,and check them,now try it out. 
+
+Inch13Early2015Air
+2019年 3月17日 星期日 19时24分06秒 CST
+  how post?ajax html5(form-data api) post?jquery post?
+  ajax.post <which-data-structure> ?client side,data seem to [{name:'field-name',value:'fiele-value'},...]
+  make some practices,do exercise.
+  at server side,
+
+Inch13Early2015Air
+2019年 3月18日 星期一 06时45分56秒 CST
+  collect forms data inot ajax obj
+
+Inch13Early2015Air
+2019年 3月18日 星期一 09时32分57秒 CST
+  Blob serverside give a route let pic can serve,client side create a xhr2,xhr2.open 'this route',xhr2.resonseType = 'blob',when blob coming,parse it as a png.
+  xhr2.onload = (e)->
+    blob = e.target.response
+    img = new Image
+    url = window.URL.createObjectUrl blob
+    img.onload = ->
+      window.URL.revokeObjectUrl url
+    img.src = url
+    $('body').append img
+
+jp-stretch-pi-2
+Wed Mar 20 07:34:16 CST 2019
+  includes buttons too.
+
+jp-stretch-pi-2
+Fri Mar 22 08:20:54 CST 2019
+  server side,parse the array from client's ajax's serializeArray(),it like:[{name:__,value:___},{name:__,value:___},...].
+  need do excerise??
+
+cyrus-Latitude-E7470
+2019年 03月 23日 星期六 07:34:18 CST
+  play,and play2 is over,remove them do the serious.
+
+jp-stretch-pi-2
+Sat Mar 23 11:50:19 CST 2019
+  need <hr/>,it is one;two is refines the response,use this json,readable.
+
+jp-stretch-pi-2
+Sat Mar 23 14:36:14 CST 2019
+  store real data.nohm.Nohm and db role --- register ModuleClass,daka schema.see coffees/md-daka.js.
+
+jp-stretch-pi-2
+Sat Mar 23 15:05:26 CST 2019
+  denny daka out of range of daytime.add module class attribute(field):bit,bit initialition is 'false'(0),if during daytime,user daka twice,means bit is 1,daka distinct by morning and afternoon,entry and exit.the screne changed.user dinny,the agent of a.b crop,at 8:00 AM step into her office,login her account from her p[hone,the admin machine is opened already.daka page display ? fieds,say entry,hello,Dinny,it is time at 8:00 AM,Daka Now?
+  index page rewrite,3 ways providing,1 admin 2 superuser 3 user.radio's attr - checked be locked by browser role(session).the coreectlpet action option :"DaKa Now" (yes)button,or add user? change password? if super user,logiout?add administrator? 
+  the module add 2 fields:1,self/super,2,entry/exit.
+
+jp-stretch-pi-2
+Mon Mar 25 20:16:09 CST 2019
+  batch store,admin complement.implement it.
+
+jp-stretch-pi-2
+Tue Mar 26 11:45:59 CST 2019
+  need simple response message for client /admin/daka-complement,alert-box,statifics:[{},{},[{},{}],{}].
+  above said,4 forms,the 3rd form include 'entry' and 'exit' items.saved successfully.client(administrator) need know stored:5 items,
+  statifics:stored 5 items - [14,15,16,17,18]  in array is ids of items which be saved successfully.
+  jie manman now.
+
+jp-stretch-pi-2
+Tue Mar 26 18:45:56 CST 2019
+  super user sometime need delete one or more admin(s).add this route.
+  and also,admin need delete user(s).
+
+jp-stretch-pi-2
+Tue Mar 26 22:44:19 CST 2019
+  tomorrow implements del admin.use RESTFUL.put method.jQuery can handle it.
+  a-pin goes out for HangZhou.
+
+Inch13Early2015Air
+2019年 3月27日 星期三 10时45分07秒 CST
+  and del and del
+
+Inch13Early2015Air
+2019年 3月28日 星期四 09时45分33秒 CST
+  add a field - 'isActive' to module  - md-account
+  in app.js,matchDB method,add codes about authenticates 'isActive' is true.
+  disable one admin or one user,add routes.
+
+cyrus-Latitude-E7470
+2019年 03月 28日 星期四 11:09:39 CST
+  let me disable.
+
+jp-stretch-pi-2
+Fri Mar 29 16:25:30 CST 2019
+  implements admin-list-users's delete button's functional.
+
+jp-stretch-pi-2
+Fri Mar 29 19:56:36 CST 2019
+  start 'play' view to explores - how to switch overlay and browser bar.
+
+cyrus-Latitude-E7470
+2019年 03月 30日 星期六 10:56:15 CST
+  改善了登录失败的提示，中文，增添了“临时被禁止”选项。下一步，要实现一个基础性功能。当用户由于以下两种原因：
+  1，内部局域网服务器打卡，并且没有DNS服务器在网内；
+  2，用户相机出故障或没有安装扫码APP（微信支付宝或QR扫码等）。
+  在些情况下，需要一种变通方式，用户可以摁管理机上的按钮（正准备提供），管理机于是触发了”服务器向管理机发送显式口令，最简单的是一组字符，比如1234，用户同时在SOCKET信道收到一个表单，按管理机显示的1234，用户在表单相应的域输入1234，再按“打卡”按钮，则视同打卡成功。“
+  
+
+cyrus-Latitude-E7470
+2019年 03月 30日 星期六 14:32:21 CST
+  draw some png.some ways.lines.
+
+
+
+hp505B
+Tue Apr  2 16:07:20 CST 2019
+  resolve 3 problems:1,manman's MiTu watch;2,switch boxes;3,door bell storage sd card(turn to fat32 type).
+
+hp505B
+Thu Apr  4 11:22:14 CST 2019
+  from here,go to really.need stacked ul elements.login page now not standlone,be mixed to First page.frist page content,maybe (should) be main ,hot app soul,it is daka.and at the bottom of this content block,i should give some interesting thing.like '结绳',what english word it is?
+  查过“有道”，叫“knotting".
+
+jp-stretch-pi-2
+Sat Apr  6 20:46:12 CST 2019
+  margin problem goes over.
+  next step,need an alternatively way 'daka',client visit 'daka' page,clicked 'daka' button,server let admin machine display QR code,but client's camera is destory already,so he clicked 'alter way for daka' button,server heard that,and give a 6-bits alphabet string let admin machine display it,at same moment,give a form to dakaing client,client enter above 6bits alphabet string,and commit the form.server check:
+  1,client role is user,username keep same.
+  2,client'form filled and fields all right.
+  3,done before dead line.
+  but before implements daka,change index.pug to 'play.pug'
+
+jp-stretch-pi-2
+Sun Apr  7 19:54:34 CST 2019
+  admin-list-user-daka now became the task.old codes make no sense,no like a list,no clearly.by visual view,need a tablise list,bootstrap give a striped table look.odrder order is the important thing.give a reverse-date list.
+  because browser-agent field too long,give a collaspse effect9button.
+
+jp-stretch-pi-2
+Mon Apr  8 18:22:59 CST 2019
+  admin list daka records.
+
+cyrus-Latitude-E7470
+2019年 04月 09日 星期二 08:17:45 CST
+  implements admin list user daka,via its alias [and] its time range.route - /admin/checkout-daka.
+
+cyrus-Latitude-E7470
+2019年 04月 09日 星期二 11:43:20 CST
+  jie manman le,jin tian da yu,jiang wen 10du.
+  need really implements time range limit,think,range could be number of items,not time range.
+
+jp-stretch-pi-2
+Wed Apr 10 08:40:18 CST 2019
+  start here,i thought it is nessary to build a 'ticket' channel/route/schema.
+  super user need this to collect all problems during development.think about that:superuser browser its newest version,act as an user,an admin,almost all time,he/she will find some problems,why not write to server db right now,no via another way(note,doc..)?
+  how-to?
+  super need,super resolve,but that ticket is from admin(s).so admin channel add 'ticket' entry(route) - /admin/create-new-ticket
+  it should exists a table,redis schema,schema first...
+
+  this time,i dont wont depends nohm,let native(relatively) npm-redis handle index,order.steps?
+  1st,make rules instead of schema,rules is:hmset a-hash,index number increase 1,then create index ,put into indexes(type:set),when need look for it ,so ,check which redis-client is alive .
+
+jp-stretch-pi-2
+Wed Apr 10 11:06:47 CST 2019
+  use formidable handle ticket route.should furmer furer..
+
+jp-stretch-pi-2
+Wed Apr 10 18:05:25 CST 2019
+  store.each ticket is hash,{title:xxx,ticket:xxx,category:'tool',should call it trick,'trick',timestamp:xxx should 2 timestamp,one is client,one is server timestamp.the rule.
+  rule:
+  1,prefix is 'Ticket'
+  2,each hash name should be like that: 'Ticket:Trick(category):hash:1'
+  3,need an  index hash's counter.
+  4,search via:keys 'Ticket:Memo*' (Memo is 1/3 of category),get ids,then for..in loop to further doing.app will leverage find all to list all of Ticket,so advice is dont leave too much ticket for clearly screen.del it easy,give a list,each item has a trigger button,click will delete db's item.no update event,can del then create new.so core skill is how-to 'hmset' and 'set index-counter',no forget anytime?should defines a save,called ticket_save() psole codes:
+   ticket_save = (res,fields,)-.>
+     await index = redis.get special-index
+     
+jp-stretch-pi-2
+Thu Apr 11 10:28:52 CST 2019
+  ticket_save = (res,fields)->
+    redis.get 'counter',(err,counter)->
+      keyname = [TICKET_PREFIX,fields.category,'hash',counter].join ':'
+      options_array = flatten fields
+      redis.hmset keyname,options_array,(err,reply)->
+        if reply is 'OK'
+          res.json 'OK'
+        else
+          res.json err
+
+    # help function
+      flatten = (obj)->
+        result = []
+        for k,v of obj
+          result=result.concat [k,v]
+        result
+           
+
+jp-stretch-pi-2
+Thu Apr 11 14:01:16 CST 2019
+  should give tickets(hash) a ttl.redis.ttl 'key',time-num?so,module no need implements 'del-ticket'?
+  update route:
+  u1: /superuser/sign-ticket-resolved
+  u2: /admin/urge-ticket-sign
+  more important problem,how-to let sup[eruser see the ticket?and ,how admin see the signed ticket(s)?
+  so,need a list route,in module view,it's 'finding'
+  f1:/superuser/list-tickets
+  f2:/admin/list-tickets
+  for they are can see during browsering index page,need a lighty sign,a bootstrap's label - span.label.label-default 4 means super user has 4 newest(no signed) tickets. 
+
+hp505B
+Sun Apr 14 08:20:19 CST 2019
+ 　为什么在这response socket试验中屡屡失败？原因其实很多，第一，在服务器的socket代码，并没有.on 'message'事件监听，以为只要客户端send，其它属于这个组的socket就”理所当然“地听到；第二，等察觉到第一原因时，已经是第二天了，但此时又忘记了重启服务器需要同时重启socket-server服务器：bin/wwww.js,只是一遍又一遍的徒劳地重启：node app.js & ....;第三，把变量code(它代表成功/失败状态）使用data-code=code的形式，放在了ＨＴＭＬ元素中，取回时，没有想到它不是string type,而是number,不论是客户端还是服务端，都是ＮＵＭＢＥＲ，所以if code is '-1'会失败，第四，再次重申一下socket.emit 'message','here is message'等同于socekt.send 'here is message'这个知识是确实的，别再瞎猜疑了。
+
+jp-stretch-pi-2
+Mon Apr 15 10:23:04 CST 2019
+  alternatively daka.
+  the button now vendors.it is be agent by its mother element - .caption,so,remve event trigger is $('.caption').off 'click',but it is better user jquery's event-namespace :$('.caption').off 'click.alt',offcause,should write trigger: $('.caption').on 'click.alt','button.altdaka',(evt)->xxx
+  next step,give dakaing user a form.
+
+Inch13Early2015Air
+2019年 4月17日 星期三 10时54分56秒 CST
+  make png instead 60x60png,remove debug info from app.js - route - /user/daka-response.
+  next,add links to admin daka page and user daka page.
+
+jp-stretch-pi-2
+Thu Apr 18 10:41:06 CST 2019
+  give a route for del all daka items,keys 'DaKa:*' (keys)->
+    for key in keys
+      del key
+  howto paralley do these,after all is deleted,give a callback.i think ,the example of github of node-redis,use delAsync = promisify(redis.del).bind(redis),then we can invoke like below:
+  promises = []
+  for key in keys
+    promises.push(delAsync key) 
+  Promise.all promises
+  .then (replies)->
+    res.render 'view.pug',{data:replies}
+
+  for step by step advice,first is in tmp/step1.coffee,make an example,see what is output?
+
+jp-stretch-pi-2
+Fri Apr 19 10:24:33 CST 2019
+  want a report,admin list all-users-report,user want its report,from one month to this year.
+  super user want archieve daka-items from a db-based system,to a single file,a pdf?idea sounds bad?
+  for easy suppose,during browser history,role:admin can click 'make report' button,this button trigger codes retrieves data from template variable - 'properties object',then,transfer each item to pdf object,pdf is a library.
+  but,i want cros 
+
+jp-stretch-pi-2
+Mon Apr 22 08:44:26 CST 2019
+  about cors,'Access-Control-Allow-Origin',i found:1,the server seted,client set no sense,2,some api tagged "cors=yes,json=yes,https=yes,credient=no" is easy,else need a apikey for commerce target.
+  so,removed(restorted) app.js's module 'cors'.
+
+jp-stretch-pi-2
+Tue Apr 23 09:08:42 CST 2019
+  pick up some route:how to fill index(page)?crawl bugger?too many things need to learn,forgive it.forget it .api-data always need apikey,means validate hostname,dns...
+  爬爬虫是解决这类问题的一个办法，有个典型的例子，有个博客作者开始是拿别人的API，后来这个叫“历史上的今天”的API停止分享了-----这是免费API的通常结果----于是自己做了一个。
+  今天争取搞个样子出来，用NODEJS。
+
+jp-stretch-pi-2
+Tue Apr 23 14:57:15 CST 2019
+  为了更好地学习爬虫相关技术，分出一个新分支：对了，爬虫英语真么说？crawler,也有挖掘机的意思。那，这个分支命名为crawler.
+
+jp-stretch-pi-2
+Wed May  1 11:51:02 CST 2019
+  爬虫的事作罢了，虽然很难过。该放下的事。
+  CSS3的问题是怎么用来创照有意义的网页元素，它也许是一个标签，也许是一个气泡框，分隔线....。
+  
+
+hp505B
+Tue May  7 14:28:03 CST 2019
+  svg lesson.now to the node:svg animation.
+
+Inch13Early2015Air
+2019年 5月 7日 星期二 16时32分37秒 CST
+  javascript can hold svg,svg for project,let interesting more.
+
+hp505B
+Mon May 13 11:19:40 CST 2019
+  problem one,jQuery(document) not work,can not retrieve outside(from <embed>) svg file's element,resolve:
+    in pagejs script.) window.onload = -> instead "$ ->"
+  problem two,jQuery can not create new svg element(example,a rect),because svg element need namespace,so,use native javascript way:"document.createElementNS('http://www.w3.org/2000/svg','rect')"
+
+hp505B
+Mon May 20 10:13:33 CST 2019
+  js communicate svg element,no problem,there are 4 cases:
+  1, svg outside html document,js codes in html document.
+  2, js codes within svg file,and svg file be included from outside
+  3, svg inside html document,js codes in html dom
+  4,js inside svg file,svg file inside html document.
+  all no problem,some delicate things need pay attention.like window loading event,svg document(getSVGDocument()).
+
+cyrus-Latitude-E7470
+2019年 05月 23日 星期四 08:34:12 CST
+  figure1 rect:line[4]:circle:text  as background of progressbar.
+  figure2 rect+arrow(right) first give -x value litenering button click.
+  buttons
+
+cyrus-Latitude-E7470
+2019年 05月 27日 星期一 08:21:19 CST
+  the <svg> and <object> width-height (size) about attribute-width-or-height(first) and inner drawing element(example a rect.).
+
+jp-stretch-pi-2
+Mon May 27 08:49:17 CST 2019
+  from views/staticify/progressbar.pug.commend:
+  1, in inkscape,draw all in svg:the static(background) and dynamics.
+  2, object tag be includes into html,give viewBox attr and width percent value.
+  3,get SVG document,from here manipopulates dynic thing.
+
+jp-stretch-pi-2
+Thu May 30 11:12:55 CST 2019
+  只想到“社会摇”，听“耳潮”(podcast)节目知道的。
+  关于那个animation的事情，现在我知道了vivus了，此库今天第一次使用,just let this library included,and done once.
+  但是，对我的启发很大，原来，给HTML看的，也是我内心真正想要的，其实是有一个概念可以代表的：线描，vivus库就是聚焦此概念的。
+  以本次想做的“进度图”为例子，我原先的“脚本”：
+  1,静态的背景，四个矩形代表四个LEVEL；
+、2,与背景图等长的进度条，开始其x=-length,露出头部于LEVEL 1的左边；
+  3,每次Click相应的按钮，进度条的x位置递增，实现覆盖。
+  实际中，每次按下第二个按钮，根本没有（动画）反应，我想是与动画引擎的render机制有关系。
+  有了vivus,“脚本”如下：
+  一，SVG图做背景，灰色，无轮廓；
+  二，按下“第一阶段”按钮，JS会动态填加一个path到代表第一阶段的矩形位置，产生线描效果；
+  三，按下“第二阶段”按钮，JS在前面的基础上，在增加“第二阶段”的线描，动画引擎从头画起；
+  如此，直到最后阶段完成。
+
+cyrus-Latitude-E7470
+2019年 05月 31日 星期五 10:54:11 CST
+  try vivus:timing function,path attribute ,text to path.install via npm.
+
+Inch13Early2015Air
+2019年 7月 2日 星期二 10时41分49秒 CST
+field:urge
+value 0
+field:"resolved" 
+value:false
+field:"title"
+value: chen op o kon gg 
+field:"category"
+value:tool
+field:"ticket"
+value: chao cuan fans minion how to record audio? 
+field:"client_time"
+value: Thu Jun 27 2019 07:58:19 GMT+0800 (CST)
+field:"admin_alias"
+value: "fool"
+field:"ticket_id"
+value: 2
+在武汉口腔医院，蛮蛮拔牙齿。
+
+Inch13Early2015Air
+2019年 7月 3日 星期三 10时16分34秒 CST
+  ul>li or table>tr>td ? panel-group panel?
+  first,i should re-learn bootstrap,v4.
+
+jp-stretch-pi-2
+Wed Jul  3 12:07:12 CST 2019
+  rebuild bootstrap and its depends.
+  "npm audit" will tell you "bootstrap^3 is out,should install new v4"
+  "npm audit fix --force" add force option will install v4.
+  "npm i --save poper.js" bootstrap v4  has a peer with popper.js(notice that,not popper!) 
+  "npm i --save font-awesome" bootstrap v4 now not includes dist/font,you cannot use "glyphicon" again,instead via "font-awesome".in html codes,use :
+    <i class="fa fa-check-ok"></i> replace <span class="glyphicon glyphicon-check-ok"></span>
+
+jp-stretch-pi-2
+Sat Jul  6 09:39:59 CST 2019
+  font-awesome is out,currentyl svg is the way build font !and! image.
+  with svg fonts set --- open-iconic,is the svg-dom-connection-tool ---- yes,itis --- "svg-injector".
+  how it works?
+  svg-injector will look for <img> tags which has a data-src or src attribute,then,turn this(these) to svg tag(from <img src=..> to <svg class=..>),after this moment,html codes as of this line can access xlink:href="#sprite-name",no need window.onload event as i expected.so,it is simple than js lib doing.
+
+jp-stretch-pi-2
+Thu Aug  1 22:16:17 CST 2019
+  need resolve 2 problems:1,client upload audio(.mp3),server parse it and output a <audio src="this-audio.mp3"...> to view before render view - /admin/newest-ticket;2,add table 'ticket' field - "agent",means device difference others.
+  for these,view which collect table's fields in views/admin-create-new-ticket.pug
+  replace 'photo' to  'media'
+  client will judge media-type,photo,audio,vedio?? in <card>,can fix.
+Inch13Early2015Air
+2019年 8月 2日 星期五 11时24分49秒 CST
+  resolved media input -- in client page.renamed 'photo' to 'media'
+
+Inch13Early2015Air
+2019年 8月 2日 星期五 11时59分06秒 CST
+  let view -- /admin/newest-ticket display media,includes photo(image/jpeg),and audio.
+
+Inch13Early2015Air
+2019年 8月 2日 星期五 15时47分18秒 CST
+  need /admin/del/:id route
+  need /admin/delWithMedia/:id route
+
+cyrus-Latitude-E7470
+2019年 08月 03日 星期六 10:56:50 CST
+  need visits statificstat. hotest hot ,how many click(view) on this article.
+
+jp-stretch-pi-2
+Sat Aug  3 13:27:28 CST 2019
+  add visits field,init is 0,means 'just created,no visitor.'
+
+jp-stretch-pi-2
+Sat Aug  3 14:40:01 CST 2019
+  after comment to origianl article -- item,its visits add 1(+=1).so,need a route:'/admin/comment/:id'
+
+jp-stretch-pi-2
+Sun Aug  4 08:57:26 CST 2019
+  change mind about route - /admin/comment/:id ,to "/admin/create-new-comment'.
+  when list ticket,it contains foreign refers to 'ticket:hash:comment:N',when client need this(these) comment(s),server further look for via:
+  for key in [m1,m2,m3,...]
+    await redis.hgetallAsync key 
+
+cyrus-Latitude-E7470
+2019年 08月 12日 星期一 09:50:22 CST
+  re-change mind,the 'comment' is not a standalone hash,it is an attribute of hash-ticket,example,ticket11.getAll:
+  { ...
+    comment-1:'title=XXX&&content=XXXX',
+    comment-2:'title=XXXXXXX && content= XXXXXXX'
+   ...
+  }
+
+jp-stretch-pi-2
+Wed Aug 14 16:40:24 CST 2019
+  special char must transfer to html entity,do it late.
+  view file,need change to display comments about one article(ticket).
+
+jp-stretch-pi-2
+Sat Aug 17 19:44:29 CST 2019
+  route - create-new-ticket,after all,return 'ok',too simple ,too ugly.
+
+jp-stretch-pi-2
+Sun Aug 18 10:44:42 CST 2019
+  big event:rm all cached,for .gitignore works.
+
+cyrus-Latitude-E7470
+2019年 08月 19日 星期一 10:18:41 CST
+  list category tickets.
+  memery:tool:problem 3 categories.
+  route - /admin/category-of-tickets/:category 
+
+jp-stretch-pi-2
+Wed Aug 21 12:06:27 CST 2019
+  resolved iPhone's modal problem,just add a(hre="#" to the toggler,in this case,it is a(data-toggle="modal" data-target="xxx" href="#"....).
+  next.
+  how to figure out the real problem.
+  tied with long long 'blog' style page,long tailer,let people unhope.
+  need first retrieve 10 top items,and an additional button <button> more</button>
+  click more if nessary,then server retrieve 11,20 items.and,one button - more.
+  view - ./admin-category-base-tickets  
+
+jp-stretch-pi-2
+Wed Aug 21 18:39:55 CST 2019
+  whild client click 'more' button,server :
+  if req.params.range 
+    start = req.params.range
+    end = Math.min (start + 10),retrieved.length 
+    records = retrieved[start...end]
+    res.render 'admin-category-ticket',{records:records,title:'..'}
+
+Inch13Early2015Air
+2019年 8月31日 星期六 17时51分11秒 CST
+  edit(update) route,when client changes category of one item,in redis database,key name changes too.
+  at route - /admin/edit-ticket/:keyname,
+  logics is: copy old key's attributes and its value,then del this old key,then create new key TICKET_PREFIX:hash:<new category>:idNumber.
+
+jp-stretch-pi-2
+Mon Sep  9 16:23:13 CST 2019
+  1,edit views/admin-newest-ticket.pug ticket has some '\r\n',split this content from string to array,then '<p>' + item + '</p>'
+  2,edit views/admin-store-success.pug ,let navigator consisten.
+  3,detail page's nav menu,not nessary fixed-top,as it opposite,has some hammer,like overcover article's header.
+  4,same func-buttons in detail page,as in newest-ticket page.
+
+Inch13Early2015Air
+2019年 9月10日 星期二 10时37分16秒 CST
+  details too many,in fact,after for loop,there is only one.
+  (i'm only one of me.)
+
+jp-stretch-pi-2
+Wed Sep 11 11:46:24 CST 2019
+  1) comments \r\n need changed to <p></p>
+  2) in detail page,no need top solid nav again. resolved above first..
+  3) in newest-ticket page,shorten the ticket words to 100chars,then follow a button - 'details'
+
+jp-stretch-pi-2
+Sun Sep 15 11:09:54 CST 2019
+  1) category-base page.its views follow newest-ticket page.
+  P556 app.get '/admin/category-of-tickets'
+
+cyrus-Latitude-E7470
+2019年 09月 15日 星期日 14:44:54 CST
+  after here,we will think about paging,like 'more..' button.
+  from server side ,dont need remember the 'last index',this task is due to client side.client page's trigger the 'more' button,will ajax query to server,with arguments which infer server offset =?
+  keyname all inference to hash object,redis.keys 'hash*',result is keys(a list), 
+
+
+
+Inch13Early2015Air
+2019年 9月15日 星期日 18时11分39秒 CST
+  paging,try1 ,let views appears a button named 'more+',click it will query to server "+10,the 20th" paging.
+
+Inch13Early2015Air
+2019年 9月16日 星期一 09时14分16秒 CST
+  分页技术牵涉到的东西有：
+  一，服务器上数据库接口的OFFSET实现；
+  二，客户端JS技术之分页导航；
+  三，缓存技术，可在服务端，如果判断总体SIZE不大的情况下，也可以在客户端；
+  四，数据库索引方案；
+  五，网页缓存哈希表。
+  如何来实 实践呢
+  听说NODEJS是单线程运行的，即是说可以在一次长连接中，共享服务器的全局变量，那么，是否能一次查询得到的列表(items)，贮存为一个数组变量，如果客户端想分次retrieve时，每次返给一个切片？
+  先把客户端的MORE做好吧。
+
+Inch13Early2015Air
+2019年 9月20日 星期五 14时39分44秒 CST
+  头脑特别容易乱这个时刻，像相声里说的“合着你找我，我找他，他找你，啊！”。
+  先复制一个标准的LISTING模板和处理监听事件的PAGEJS-LISTING
+
+Inch13Early2015Air
+2019年 9月23日 星期一 11时50分25秒 CST
+  found one bug.
+  in navigator's search form,after input number,server will search from redis db,response to client,but search via redis.keys function,so,'1' match xxx101,100,and 81...
+  return the first found,usually,it is not reliable.
+  let us fix this.
+
+Inch13Early2015Air
+2019年 9月25日 星期三 11时20分44秒 CST
+  learn about child_process,spawn on 'data',on 'close'
+
+cyrus-Latitude-E7470
+2019年 09月 29日 星期日 09:07:15 CST
+  web transit is slower and slower,maybe it due to 10.1 china.
+  search the way for contribute 'local' article to center server so far.
+
+
+
+cyrus-Latitude-E7470
+2019年 09月 29日 星期日 10:04:43 CST
+  can zombiejs make a post-request with a file(example:jpeg) to center server?
+  see detaild things in zombie api.
+
+Inch13Early2015Air
+2019年10月 5日 星期六 11时03分12秒 CST
+  continue with post article's meta data to route -- no-auth
+  P875 - no-auth
+  P374 - create-new-ticket
+
+Inch13Early2015Air
+2019年10月 6日 星期日 09时35分04秒 CST
+  P396 else case(about res.json)
+
+cyrus-Latitude-E7470
+2019年 10月 08日 星期二 10:34:55 CST
+  try post via superagent
+
+cyrus-Latitude-E7470
+2019年 10月 08日 星期二 21:14:27 CST
+  todo: add a button (.contribute) in view:admin-ticket-detail.pug,a listen func in pagejs-admin-ticket-detail.js,let js ajax request its id number,then server start do superagent post to another server(example,center server).
+
+cyrus-Latitude-E7470
+2019年 10月 09日 星期三 15:39:45 CST
+  write in app.js. route "(post)/admin/contribute" need be done.transfer to pi2.
+
+jp-stretch-pi-2
+Wed Oct  9 21:40:25 CST 2019
+  接下来，要增加一个modal,里面含一个表单，从中收集to(ip addr and port),选择性的提供撰写者名字。参照views/admin-newest-ticket里的提交comment的modal.
+
+jp-stretch-pi-2
+2019年 11月 28日 星期四 09:49:10 CST
+  没有想到,这么快就回到"纯"软开发的世界:为这个事实上的博客系统,增添一个全条目查找的功能.大致的想法是:
+  1,增加一个路由,叫
+
+jp-stretch-pi-2
+Thu Nov 28 13:51:48 CST 2019
+  (续）“make-full-list"(/admin/make-full-list),照例，先检查是否具备ADMIN身份，如有，则进一步检查是否在目录(directory:./public/solid-lists/)下存在文件，而且，最新的一份文件，ctime是否在10天以上？以上所有断言都是YES的情况下，数据库REDIS开始把所有的条目检索出来，再编入一个数组。
+
+Inch13Early2015Air
+2019年11月30日 星期六 10时12分06秒 CST
+  重回纯软工作平台，下一步：从share/doublelist.coffee开发一个硬编码列表页。

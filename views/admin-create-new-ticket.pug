@@ -1,0 +1,47 @@
+extends layouts/main
+block pagejs
+  script(src="/mine/mine-admin-create-new-ticket.js")
+block pagecss
+  style.
+    body {
+      color:#1a2a3a;
+    }
+    .preview {
+      margin:2rem;
+      padding:2rem;
+      border:2px solid purple;
+    }
+block content
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-fixed-top
+    a(type="button" class="navbar-btn btn btn-default" role="button" href="/admin/newest-ticket") 
+      span.oi.oi-chevron-left.mr-4
+      | tickets 
+  br/
+  br/
+  h3 Fill Ticket Form
+  form(enctype="multipart/form-data" action="/admin/create-new-ticket/" method="POST" id="ticket-form")
+    .form-group
+      label(for="title") title
+      input(class="form-control" type="text" id="title" name="title")
+    .form-group
+      p.form-text choice this record's catogary
+      .form-check-inline.form-check.mr-4
+        input.form-check-input(id="check-memo" type="radio" name="category" value="memo" checked="checked")
+        label.form-check-label(for='check-memo') memo
+      .form-check.form-check-inline.mr-4
+        input(class="form-check-input" id="check-tool" type="radio" name="category" value="tool")
+        label(class="form-check-label",for="check-tool") tool
+      .form-check.form-check-inline.mr-4
+        input(class="form-check-input"  id="check-problem" type="radio" name="category" value="problem")
+        label.form-check-label(for="check-problem") problem
+    .form-group
+      label(for="ticket") Write Ticket Here:
+      textarea(class="form-control" rows="15" id="ticket" name="ticket") 
+    .form-group
+      input(class="d-flex mt-4" type="file" name="media" id="onemedia")
+      div.d-none.preview
+       
+    .form-group
+      input.d-none(name="client_time" value="0")
+      input.d-none(name="admin_alias" value=alias)
+      button(type="submit" class="btn btn-dark btn-lg") Submit Now

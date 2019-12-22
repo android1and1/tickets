@@ -1,0 +1,29 @@
+extend layouts/main
+block content
+  if accounts.length === 0
+    p currently no account.
+  div 
+    - for(eachone in accounts)
+      .panel.panel-default
+        - item = accounts[eachone]
+        - 
+          id = item.id
+          alias = item.alias
+          role = item.role
+          timestamp = item.initial_timestamp
+          password = item.password
+        .panel-heading= alias + '(id=' + id  + ')'
+        .panel-body
+          h3= "alias= " + alias 
+          h3= "role= " + role 
+          - time_describe = new Date(timestamp)
+          h3= "账户创建时间: " + time_describe
+          h3= "password= " + password
+        .row
+          .col-sm-offset-4.col-sm-5
+            button.btn.btn-danger.remove(data-itemid=id) Remove!
+        br/
+block pagejs
+  script(src="/pagejs/pagejs-createModal.js")
+  script(src="/pagejs/pagejs-create-alert-box.js")
+  script(src="/mine/mine-superuser-list-admins.js")

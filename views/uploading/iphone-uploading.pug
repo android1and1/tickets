@@ -1,0 +1,18 @@
+extends ../layouts/main
+block pagejs
+  script(src="/pagejs/uploading/pagejs-iphone-uploading.js")
+block content 
+  h1 here is uploading photo(video) page
+  h2 help text: choices one or multiple files from your iphone,then click upload button
+  form(enctype="multipart/form-data" action="/uploading/iphone-uploading" method="post" id="leyou")
+    .form-group
+      label(class="control-label" for="choicefiles") Choice Uploading file(s)
+      input(type="file" class="form-control hide" name="choicefiles" id="choicefiles" multiple="multiple") 
+    .form-group
+      label(class="control-label" for="specof") Spec Of Photo(es) 
+      textarea(class="form-control" name="specof" id="specof" rows="3" cols="10" wrap="soft") 
+    .checkbox
+      label
+        input(type="checkbox" name="ifenc") 
+        |  need encrypt
+    button(type="submit" class="btn btn-primary") Upload Now

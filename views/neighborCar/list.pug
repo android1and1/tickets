@@ -1,0 +1,127 @@
+extends ../layouts/main.pug
+block pagecss
+  style.
+    div.content {position:relative;top:4em;}
+    address {margin-left:2em;}
+    .btn-group {
+      margin-left:0.9em;
+    } 
+
+block pagejs
+  script(src="/mine/mine-create-alert-box.js")
+  script(src="/pagejs/neighborCar/pagejs-neighborCar-list.js")
+block footer
+  h1 table without table-responsive class 
+  table.table.table-bordered.table-striped
+    tr
+      td without responsive
+      td
+         input(type="text" name="text1" value='value1')
+      td label:this field has success status
+      td.success
+         input(type="text"  name="text1" value='value1')
+    tr
+      td this field is disabled 
+      td
+         input(type="text" disabled='true' name="text1" value='value1')
+      td chaochang de label chao chang:without responsive
+      td
+         input(type="text" name="text1" value='value1')
+  h1 table with table-responsive class 
+  .table-responsive
+    table.table
+      tr
+        td label of field
+        td 
+          input(type='text' value='ni hao a?')
+        td label of field
+        td 
+          input(type='text' value='ni hao a?')
+        td chaochang de label chaochang de label:label of field
+        td 
+          input(type='text' value='ni hao a?')
+      tr
+        td label of field
+        td 
+          input(type='text' value='ni hao a?')
+        td label of field
+        td 
+          input(type='text' value='ni hao a?')
+        td chaochang de label chaochang de label:label of field
+        td 
+          input(type='text' value='ni hao a?')
+      tr
+        td label of field
+        td 
+          input(type='text' value='ni hao a?')
+        td label of field
+        td 
+          input(type='text' value='ni hao a?')
+        td chaochang de label chaochang de label:label of field
+        td 
+          input(type='text' value='ni hao a?')
+
+block content
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container-fluid
+      .navbar-header
+        //- brand
+        a(class="navbar-brand" href="/")
+          img(src="/images/bn.png")
+        button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#links")
+          span(class="icon-bar")
+          span(class="icon-bar")
+          span(class="icon-bar")
+      div.collapse.navbar-collapse(id="links")
+        ul.nav.navbar-nav
+          li 
+            a(href="/neighborCar/register-car/") Register Car
+          li 
+            a(href="/neighborCar/purge-db/") Delete
+        // The Search Form
+        form(id="search-form" class="navbar-form navbar-right" method="POST" action="")
+          .form-group
+            input(type="text" name="keyword" class="form-control" placeholder="keyword")
+            span &nbsp;&nbsp;&emsp;
+            label(class="radio-inline") 
+              input(type="radio" name="keyword-for" value="brand")
+              | brand 
+            label(class="radio-inline") 
+              input(type="radio" name="keyword-for" value="color") 
+              | color 
+            label(class="radio-inline") 
+              input(type="radio" name="keyword-for" value="vehicle_model") 
+              | vehicle-model 
+     
+            span &emsp;&emsp;
+          button(type="submit" class="btn btn-info") Search!
+  if (top10.length > 0)
+    .content
+      h1 The Top10 List
+      each item in top10
+        div.panel.panel-default
+          .panel-heading id: #{item.id}
+          .panel-body
+            // display details
+            ul
+              li License_Plate_Number:<span>&emsp;</span> <em>#{item.license_plate_number}</em>
+              li Brand:<span>&emsp;</span><em> #{item.brand}</em>
+              li Color: <span>&emsp;</span><em>#{item.color}</em>
+              li Where_Seen:<span>&emsp;</span><em> #{item.where_seen}</em>
+              li Vehicle_Model:<span>&emsp;</span><em> #{item.vehicle_model}</em>
+              - var timedesc = (new Date(parseInt(item.whatistime))).toLocaleString()
+              li WhatIsTime:<span>&emsp;</span> <em>#{timedesc} </em>
+              li Visits:<span>&emsp;</span> <em> #{item.visits} </em>
+              li Memo
+                div!= item.memo
+            // support buttons 
+            .btn-group.btn-group-lg
+              button(class="btn btn-info vote" data-vote-id= item.id) vote
+              button(class="btn btn-default edit" data-edit-id=item.id) Edit  
+              button(class="btn btn-danger delete" data-delete-id= item.id) Delete  
+  else
+    .content
+      h1 these is no items currently.
+  br
+  br
+  div#billboard

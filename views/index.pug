@@ -1,0 +1,114 @@
+extends layouts/main
+block content
+  div.left.hidden
+    ul.nav.nav-pills.nav-stacked
+      li.active 
+        h2
+          a(data-toggle="collapse" href="#userLogin") staff 入口 
+        div(id="userLogin" class="collapse well")
+          ol.nav.nav-pills.nav-stacked
+            li
+              a(href="/user/login") 登录帐号 
+            li 
+              a(href="#" id="userLogout") Exit User's Account
+            li
+              a(href="/user/daka") 打卡 
+      li
+        h2
+          a(data-toggle="collapse" href="#adminLogin") Admin 入口 
+        div(class="collapse well" id="adminLogin")
+          ul.nav.nav-pills.nav-stacked
+            li
+              a(href="/admin/login" id="adminLogin") Admin Login
+            li
+              a(href="#" id="adminLogout") Admin 退出帐号 
+            li
+              a(href="/admin/register-user" id="adminRegisterUser") Admin Register User
+            li
+              a(href="/admin/list-users" id="adminListUsers") Admin List Users
+            li
+              a(href="/admin/daka" id="adminDaka") Admin DaKa 
+            li
+              a(href="/admin/checkout-daka" id="adminCheckoutOneUser") Check Out DaKa History 
+      li
+        h2
+          a(data-toggle="collapse" href="#superuserLogin") Super User 选项 
+        div(class="collapse well" id="superuserLogin")
+          ul.nav.nav-pills.nav-stacked
+            li
+              a(href="/superuser/login" id="superuserLogin") Superuser Login
+            li
+              a(href="#" id="superuserLogout") Superuser Logout
+            li
+              a(href="/superuser/register-admin" id="superuserRegisterAdmin") Superuser Register Admin 
+            li
+              a(href="/superuser/list-admins" id="superuserListUsers") Superuser List Admins 
+            li
+              a(href='/superuser/daka-complement') daka complement
+            li
+              a(href='/superuser/delete-all-daka-items') 删除所有打卡记录 
+  div.right
+    nav.navbar.navbar-default#onebuttonbar 
+      button.btn.btn-default.btn-md#switch
+        span.glyphicon.glyphicon-menu-hamburger
+    
+    .jumbotron
+      h1 得宜家打卡考勤系统 
+    p right content p right content p right content p right content p right content p right content p right content p right content p right content p right content
+    p right content p right content p right content p right content p right content p right content p right content p right content p right content p right content
+    p right content p right content p right content p right content p right content p right content p right content p right content p right content p right content
+    p right content p right content p right content p right content p right content p right content p right content p right content p right content p right content
+    p right content p right content p right content p right content p right content p right content p right content p right content p right content p right content
+    .jintian
+      h2 placeholder of .jintian
+
+block footer
+  div#rightmodal.hidden
+  h2#tellwhichrole= "Your Currently Role Is [" + role + "]."
+block pagecss
+  style.
+    body {
+      width:100%;
+      padding:0px;
+      margin:0px;
+      position:relative;
+      background-color:#fff;
+    }
+    nav#onebuttonbar {
+      z-index:1000;
+    }
+    div.left,div.right {
+      overflow:hidden;
+      white-space:nowrap;
+      color:#4a5a6a;
+      padding:0px;
+      margin:0px;
+    }
+    div.left{
+      width:10%;
+      float:left;
+      background-color:white;
+      overflow:hidden;
+    }
+    div.right{
+      width:100%;
+      height:700px;
+      background-color:#FF9966;
+    }
+    #rightmodal {
+      position:absolute;
+      top:0;
+      z-index:10;
+      right:0;
+      width:15%;
+      height:100%;
+      background-color:rgba(0,0,0,0.5);
+    }
+    div.tab-content {
+      border:2px solid purple;
+    }
+    #switch {
+      margin-left:1em;
+    }    
+block pagejs
+  script(src="/mine/mine-index.js")

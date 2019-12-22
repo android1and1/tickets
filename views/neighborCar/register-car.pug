@@ -1,0 +1,18 @@
+extends ../layouts/main
+block pagejs
+  //
+    mine-create-alert-box will bring the 'window.createAlertBox()',it accepts 2 args
+    first,it is "parent",notice that ,its type is jQuery Element,not Dom Element.
+    second,it is "content-need-display-to-user",text,string...
+  script(src="/mine/mine-create-alert-box.js")
+  script(src="/pagejs/neighborCar/pagejs-neighborCar-register.js")
+block content
+  h2.text-center Register Neighbor Car
+  include ./base-item-form
+block footer
+  ul.pager
+    li.previous
+      a(href="/neighborCar/list") <span> &larr; </span> back to list
+    li.next
+      a(id="reset" href="") reset<span> &rarr;</span>
+  div#msgbox

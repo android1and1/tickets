@@ -1,0 +1,18 @@
+extends ../layouts/main.pug
+block pagejs
+  // script(src="/pagejs/neighborCar/pagejs-neighborCar-list.js")
+block content
+  h1 Results List
+  if list
+    each item in list
+      h1= 'id number#' + item.id 
+      ul
+        each v,k in item
+          li= k + ':' + v 
+  else
+    h1 No Any Result.
+  div.footer
+    ul.pager
+      li.previous
+        a(href="/neighborCar")  <span> &larr;</span>
+          |to home page of this channel

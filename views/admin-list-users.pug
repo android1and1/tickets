@@ -1,0 +1,40 @@
+extend layouts/main
+block content
+  nav.navbar.navbar-default.navbar-fixed-top
+    .container
+      a(type="button" class="navbar-btn btn btn-primary" href="/") &larr; 回到首页 
+      h4.navbar-right.navbar-text 当前用户列表
+  if accounts.length === 0
+    p currently no account.
+  div 
+    - for(eachone in accounts)
+      .panel.panel-default
+        - item = accounts[eachone]
+        - 
+          id = item.id
+          alias = item.alias
+          role = item.role
+          isActive = item.isActive
+          timestamp = item.initial_timestamp
+          time_describe = new Date(timestamp) 
+          password = item.password
+        .panel-heading= alias + '(id=' + id  + ')'
+        .panel-body
+          h3 <small>alias</small> #{alias} 
+          h3 <small>role</small> #{role} 
+          h3.isActive <small>isActive</small> #{isActive} 
+          h3 <small>创建时间</small> #{time_describe}
+          h3 <small>password:</small> #{password}
+          .btn-group.btn-group-md
+            if isActive
+              button.btn.btn-default.disablebutton(data-userid=id data-complete-text="Has Disabled.") Disable This Account
+              button.btn.btn-default.enablebutton(disabled data-userid=id) Enable This Account
+            else
+              button.btn.btn-default.disablebutton(disabled data-userid=id data-complete-text="Has Disabled.") Disable This Account
+              button.btn.btn-default.enablebutton(data-userid=id) Enable This Account
+            button.btn.btn-default.deletebutton(data-userid=id) Delete This Account
+     
+block pagejs
+  script(src="/pagejs/pagejs-createModal.js")
+  script(src="/pagejs/pagejs-create-alert-box.js")
+  script(src="/mine/mine-admin-list-users.js") 

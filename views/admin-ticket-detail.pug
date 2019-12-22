@@ -1,0 +1,97 @@
+extend layouts/main
+block pagejs
+  script(src="/pagejs/pagejs-admin-ticket-detail.js")
+block content
+  //- variable from route (post)'/admin/ticket-details'
+  include widgets/tickets-common-navigator.pug
+  h2.display-3 &nbsp;
+  if item
+    .card.mt-8
+      - type = item.media_type
+      case type
+        when 'image/jpeg'
+        when 'image/png'
+        when 'image/svg+xml'
+        when 'image/gif'
+          img(class="img-fluid img-thumbnail card-img-top" alt="photograph" src=item.media)
+        when 'audio/mp3' 
+        when 'audio/mpeg' 
+        when 'audio/mpeg3'
+          .row
+            audio(class="d-flex w-75 p-2 mx-auto" controls="controls")
+              source(src= item.media,type= type)
+        when 'video/mp4'
+        when 'video/quicktime'
+          video(controls="controls" src=item.media)
+            p Your Browser Dont Support Video Widget 
+        default
+          img(class="img-thumbnail img-fluid card-img-top" alt="place holder pic" src="/images/box-default.svg")
+      .card-body
+        h4.card-title= '#' + item.ticket_id + ':' +  item.title 
+        p(class="text-muted") <em>category:#{item.category}</em>
+        p(class="text-muted") <em>visits:#{item.visits}</em>
+        blockquote.blockquote
+          - var paragraphs = item.ticket.replace(/\r\n/g,'\n').split('\n');
+          each paragraph in paragraphs
+            p= paragraph 
+          footer.blockquote-footer [#{item.admin_alias}] written at #{item.client_time}
+    hr
+    hr
+    h4.display-5.mb-5  本条目共<span class="badge badge-success"> #{item.comments.length} </span> 条评论
+    ul.list-group
+      each comment in item.comments
+        li.list-group-item!= comment 
+    hr/
+    .btn-group
+      div.modal(id="modal-" + item.ticket_id)
+        div.modal-dialog.modal-dialog-centered
+          div.modal-content
+            .modal-header
+              h4.modal-title  留下你的评论 
+              button(class="btn btn-light" data-dismiss="modal")
+                span.oi.oi-x
+            .modal-body
+              form(id=item.keyname,class="comment-form")
+                .form-group
+                  label(for= "input-" + item.ticket_id + "-comment") 说点什么 
+                  textarea.form-control(name="comment",id="input-" + item.ticket_id + "-comment",rows="8") 
+                .form-group
+                  button(type="submit" class="btn btn-secondary") 写好了，提交！ 
+      //- only one modal,so no need variable id!
+      div.modal(id="fill-address-modal")
+        div.modal-dialog.modal-dialog-centered
+          div.modal-content
+            .modal-header
+              h4.modal-title  投稿
+              button(class="btn btn-light" data-dismiss="modal")
+                span.oi.oi-x
+            .modal-body
+              form(id="contribute-form",data-keyname=item.keyname)
+                .form-group
+                  label(for= "input-address") 收稿服务器IP地址 
+                  div(class="input-group mb-3" id="input-address")
+                    div(class="input-group-prepend")
+                      span(class="input-group-text") http://
+                    input(type="text" class="form-control" name="to-address") 
+                .form-group
+                  label(for= "input-port") 端口号 
+                  div(id="input-port" class="input-group mb-3")
+                    div(class="input-group-prepend")
+                      span(class="input-group-text") * 留空则为端口80 
+                    input(type="text" class="form-control" name="to-port") 
+                .form-group
+                  button(type="button" data-dismiss="modal" class="mx-2 btn btn-secondary") 撤回 
+                  button(type="submit" class="mx-2 btn btn-dark") 发出！ 
+     
+      a.btn.btn-outline-info.mx-2.p-2(href="#" role="button" data-toggle="modal" data-target="#modal-" + item.ticket_id) write your comment
+      button.btn.btn-outline-secondary.mx-2.p-2(href="#",data-toggle="modal" data-target="#fill-address-modal") 投稿 
+      a.btn.btn-outline-info.mx-2.p-2.editLink(role="button" href= "/admin/edit-ticket/" + item.keyname) Edit 
+      button.btn.btn-outline-danger.dropdown-toggle.mx-2.p-2#delButton(data-toggle="dropdown") delete
+      div.dropdown-menu
+        a.dropdown-item.deleteOne(data-with-media='false',data-keyname= item.keyname,href="#") Delete
+        - if(!item.media)
+          a.disabled.dropdown-item.deleteOneWithMedia(data-with-media='true',data-keyname= item.keyname,href="#") Delete With Its Media File
+        - else
+          a.dropdown-item.deleteOneWithMedia(data-with-media='true',data-keyname= item.keyname,href="#") Delete With Its Media File
+  else
+    p no clear

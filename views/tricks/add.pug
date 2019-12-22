@@ -1,0 +1,19 @@
+extend ../layouts/main
+block pagecss
+  style(type="text/css").
+    .shinning { 
+      padding:2em;
+      margin:4em;
+      height:2%;
+      background-color:yellow;
+    }
+block pagejs
+  script(src="/pagejs/tricks/pagejs-tricks-add.js")
+block content
+  a.comeback(type="button" role="button" class="btn btn-primary btn-lg" href="/tricks" alt="come back to front page of whole site") come back
+  form(action="" enctype="multipart/form-data" method="POST")
+    input(type="text" value='1' class="hide" id="behidden" name="sign")
+    p.help-block here is a help block,can remarkable with helpful infomations.
+    include ./snippet-form.pug
+    div#deadline
+    button#submit(class="btn btn-default" type="submit") Submit!

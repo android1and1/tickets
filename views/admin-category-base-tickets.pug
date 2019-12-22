@@ -1,0 +1,29 @@
+extends layouts/main
+block content
+  nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+    a(class="navbar-brand" href="#") Navbar
+    button(class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse") <span class="oi oi-menu"></span>
+    div(class="collaspe navbar-collapse" id="navbarCollapse")
+      div.navbar-nav
+        a(class="nav-item nav-link",href="/admin/newest-ticket") Newest Tickets 
+        a(class="nav-item nav-link",href="/admin/create-new-ticket") Create New Ticket 
+        a(class="nav-item nav-link",href="/admin/category-of-tickets/memo")  Memo
+        a(class="nav-item nav-link",href="/admin/category-of-tickets/tool") Tool
+        a(class="nav-item nav-link",href="/admin/category-of-tickets/problem") Problem
+  //- start listing,global variable - 'records' 
+  if records.length
+    ul.list-group
+      each record in records
+        li.list-group-item.mb-4 
+          if record.media
+            img.img-thumbnail.img-fluid.rounded(src= record.media alt="topic photo")
+          else
+            img.img-thumbnail.img-fluid.rounded(src="/images/dot64x64.png" alt="placehoder photo")
+          h4.display-3= '#' + record.ticket_id + ':' + record.title
+          blockquote.blockquote 
+            p #{record.ticket}
+            p 
+              a.d-inline.mr-2(href="#") <span class="badge badge-success"> #{record.comments.length} </span>
+              | Comment
+  else
+    h2.display-3 No Record 

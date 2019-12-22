@@ -1,0 +1,88 @@
+extends layouts/main
+block pagejs
+  script(src="/pagejs/pagejs-admin-newest-ticket.js")
+block content
+  include widgets/tickets-common-navigator.pug
+  //- content start from here.  
+  if records.length === 0
+    h2.display-3.mt-8 None
+  else
+    //- offset placeholder
+    h2.display-4 &nbsp;
+    // global variable -- records
+    - for(var j=0;j<records.length;j++){
+      .card.mt-4
+        - obj = records[j]
+        - type = obj.media_type
+        case type
+          when 'image/jpeg'
+          when 'image/gif'
+          when 'image/svg+xml'
+          when 'image/png'
+            img(class="img-fluid img-thumbnail card-img-top" alt="photograph" src=obj.media)
+          when 'video/quicktime'
+          when 'video/mp4'
+            video(controls="controls" src= obj.media)
+              p Your Browser Dont Support Video Widget
+          when 'audio/mp3' 
+          when 'audio/mpeg' 
+          when 'audio/mpeg3'
+            .row
+              audio(class="d-flex w-75 p-2 mx-auto" controls="controls")
+                source(src= obj.media,type= type)
+          default
+            img(class="img-thumbnail img-fluid card-img-top" alt="place holder pic" src="/images/box-default.svg")
+        .card-body
+          //-h4.text-center.text-secondary.card-title= '#' + obj.ticket_id + ':' + obj.title
+          h4.text-center.text-secondary.card-title= '#' + obj.ticket_id + ':' + obj.title
+            if obj.comments.length 
+              a.badge.badge-success.ml-3(data-toggle="collapse" href="#comments-for-" + obj.ticket_id)= '有 ' + obj.comments.length  + ' 评论'
+            else
+              a.badge.badge-light.disabled.ml-3= '有 ' + obj.comments.length  + ' 评论'
+          div.card-text
+            - var paragraph = obj.ticket.split('\r\n')[0] 
+            blockquote
+              //-each paragraph in paragraphs
+              //-  p= paragraph 
+              p= paragraph 
+              p
+                a(href="/admin/get-ticket-by-id/"+obj.ticket_id,class="d-inline-flex p-2" alt="to special id details") Details
+              footer.blockquote-footer= obj.keyname + ' (访问次数：' + obj.visits + ')'
+            div(class="collapse mb-4" id="comments-for-" + obj.ticket_id)
+              - for(var i=0;i<obj.comments.length;i++){
+                ul.list-group
+                  li.list-group-item!= obj.comments[i]
+              - }
+            .btn-group
+              div.modal(id="modal-" + obj.ticket_id)
+                div.modal-dialog.modal-dialog-centered
+                  div.modal-content
+                    .modal-header
+                      h4.modal-title  留下你的评论 
+                      button(class="btn btn-light" data-dismiss="modal")
+                        span.oi.oi-x
+                    .modal-body
+                      form(id=obj.keyname,class="comment-form")
+                        .form-group
+                          label(for= "input-" + obj.ticket_id + "-comment") 说点什么 
+                          textarea.form-control(name="comment",id="input-" + obj.ticket_id + "-comment",rows="8") 
+                        .form-group
+                          button(type="submit" class="btn btn-secondary") 写好了，提交！ 
+             
+              a.btn.btn-outline-info.mx-2.p-2(href="#" role="button" data-toggle="modal" data-target="#modal-" + obj.ticket_id) write your comment
+              a.btn.btn-outline-info.mx-2.p-2.editLink(role="button" href= "/admin/edit-ticket/" + obj.keyname) Edit 
+              button.btn.btn-outline-danger.dropdown-toggle.mx-2.p-2#delButton(data-toggle="dropdown") delete
+              div.dropdown-menu
+                a.dropdown-item.deleteOne(data-with-media='false',data-keyname= obj.keyname,href="#") Delete
+                - if(!obj.media)
+                  a.disabled.dropdown-item.deleteOneWithMedia(data-with-media='true',data-keyname= obj.keyname,href="#") Delete With Its Media File
+                - else
+                  a.dropdown-item.deleteOneWithMedia(data-with-media='true',data-keyname= obj.keyname,href="#") Delete With Its Media File
+        .card-footer
+          .container-fluid
+            .row
+              small(class="col-sm mx-auto")= obj.client_time
+            .row
+              small.col= '撰写人 - ' +  obj.admin_alias
+              small.col= '分类 - ' + obj.category
+    - } 

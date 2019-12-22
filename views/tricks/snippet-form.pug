@@ -1,0 +1,14 @@
+.form-group
+  - field_about_id="Group-" + order + "-Field-About"
+  label(class="control-label" for=field_about_id) About
+  input(type="text" class="form-control" id=field_about_id name="about" placeholder="about..")
+.form-group
+  - field_content_id="Group-" + order + "-Field-Content"
+  label(class="control-labels" for=field_content_id) Content
+  textarea(class="form-control" id=field_content_id name="content" rows="5" placeholder="content..")
+.form-group
+  - field_visits_id="Group-" + order + "-Field-Visits"
+  label(class="control-label" for=field_visits_id) Visits
+  input(type="number" class="form-control" id= field_visits_id name="visits")
+button(type="button" class="onemore btn btn-primary") + 1 
+.shinning

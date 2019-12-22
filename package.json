@@ -1,0 +1,49 @@
+{
+  "name": "easti",
+  "version": "1.0.0",
+  "description": "airbnb rent electic-commercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "tokyo:easti.git"
+  },
+  "keywords": [
+    "holiday-house"
+  ],
+  "author": "circle cyrus",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "cheerio": "^1.0.0-rc.3",
+    "connect-redis": "^3.4.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "formidable": "^1.2.1",
+    "jquery": "^3.4.0",
+    "nohm": "^2.2.0",
+    "open-iconic": "^1.1.1",
+    "popper.js": "^1.15.0",
+    "pug": "^2.0.3",
+    "qr-image": "^3.2.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.2.0",
+    "sqlite3": "^4.0.4",
+    "superagent": "^5.1.0",
+    "svg-injector": "^1.1.3",
+    "svg.js": "^2.7.1",
+    "thunkify": "^2.1.2",
+    "vivus": "^0.4.4"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.3.2",
+    "grunt": "^1.0.4",
+    "grunt-exec": "^3.0.0",
+    "grunt-simple-mocha": "^0.4.1",
+    "zombie": "^6.1.4"
+  }
+}

@@ -1,0 +1,484 @@
+this project easti means east of hailing island,it is belong to GuangDong.YangJiang.
+its purpose is do an airbnb like site:provides some holiday-room's info,price,clients can order 1 room,then get transation's info,review.on-line provide password for door-lock,display useful manu of the room.
+--- created at 2018-8-8 ,alan dershowitz.
+
+#####################
+#####################
+  init project
+#####################
+#####################
+git clone 
+  git clone tokyo:easti.git(then cd easti)
+npm install
+  run 'npm install'
+*staticify jq and boot
+  run "coffee bin/staticify-jq-bt.coffee",under public/ they all created. 
+test simple site
+  coffee coffees/envCheck.coffee (running at port 8888)
+
+
+* only the 1st client need run this.
+
+
+#####################
+#####################
+  formidable
+#####################
+#####################
+formidable module has very important widget - 'IncomingForm' class.
+useage:
+form = new formidable.IncomingForm
+form.parse req,(err,fileds,files)->
+  # fileds
+form.on 'file',(name,value)->
+  # name is client html page's type="file",name="XXX"
+  # value is a File object list,each File can retrieved via:"for file in value"(then,file.name,file.path in the scope) 
+form.on 'field',(name,value)->
+  # name is as like as client page's "input(type="text" name="XXX"...)"
+  # value is field's value,type as client page defined,e.g.Number,String,...
+
+
+debug level:
+if something wrong occurs,follow the oredered list:
+1,form action attr?
+2,form method?
+3,fields has its name?
+4,form enctype attr?
+5,input(type="file") has multiple attr?
+6,server codes include "form.parse()"?
+7,server uploadDir setup?
+8,jquery xhr constructor set "data-parse"?
+
+############################################
+  sort via node method - Array.sort 
+############################################
+Example
+  arr = [1..10]
+  arr.sort (a,b)->a-b  # will output [1,2,3,...10]
+  arr.sort (a,b)->b-a  # will output [10,9,8....1] ---- as reverse.
+Same as object array.
+  arr = []
+  arr.push {'id':10,'name':'bob'}
+  arr.push {'id':1,'name':'mary'}
+  arr.sort (a,b)->a.id - b.id  # will output [ {'id':1,'name':'mary'}, {'id':10,'name':'bob'}]
+In route - /admin/newest-ticket,i sorts redis hashes by this way.  
+
+######################
+######################
+  Mac Air Book
+######################
+######################
+
+its nodejs installed by nodejs.xxx.tar via nodejs.org,64bit version(latest),just choice nodejs lib place,i choiced the //usr/local/node-v8.12.0-darwin-x64/bin/node
+and make a link to binary file:
+ /usr/local/bin/node -> /usr/local/node-v8.12.0-darwin-x64/bin/node
+
+redis-server as nodejs,from office-site download .tar file,unextract and put its content to favirote place - ' /usr/local/redis-4.0.10'
+then make 2 soft links for redis-server and redis-cli.
+run server: "redis-server &",note that no need sudo
+run client:"redis-cli"
+in 'app.js',defines check and lauch redis-server,after http server closing,the redis-server still alive,but in some os(machine),it will close too.why.i have checked the /usr/local/bin/redis-server its attribute,id=root,group=wheel,and other privilage is 'r-x'(can execute).i will see other machines env.
+a tip,in client'shell,run "shutdown save" can affect server to close and save key-value before really disconnect.
+
+
+######################
+######################
+  Modal For iPhone 
+######################
+######################
+if obey example of bootstrap's tutorial,iphone can not open modal.in stackover site,some advice:
+"add href="#" to <a> attribute"
+after that,my iphone works.
+
+
+######################
+######################
+  redis-server
+######################
+######################
+
+redis-server commended to be a manually start program,after "apt install",redis-server always be a system-manager,and boot-with program,
+there is 1 drawback:user always forget use their customer db file,at <project>/redisdb/easti.dump.rdb,and their customer config file at <project>/redisdb/redis.conf.
+so,start redis-server is app's task.in app.js,will find some "spawn" codes about check-start redis-server.
+redis-server run from project rootdirectory,run:
+redis-server ./redisdb/redis.conf  (redisdb collect all redis-like things together)
+redis-server use db filename is ./redisdb/easti.dump.rdb (in .gitignore file,it is be ignores,so each client use itself)
+
+detail infoes read from ./redisdb/readme.
+
+
+at one situation:the standalone module test (usually in <project>/test directory),http server no running,just module-app imported into the mocha-test-js,so,due to app script's logic,the 'redis-server' no running,we can do this:
+"redis-server ./redisdb/redis.conf && mocha <the-test-js>"
+
+OSX platform(Darwin) not like linux platform,its redis-server start with app.js,but after app.js exit,redis-server still alive.
+OSX platform:
+1) nodejs run child process - redis-server - not immedely return 'close' event,parent process can not know which state it in.
+2) redis-server need standlone process which at outter(another shell etc..) shutdown it.
+
+Linux Platform:
+1) child process will return 'close' event soon after child process be created(spawn).
+2) after app.js exit,redis-server as its child process will exit.
+
+* currently version app.js:
+at OSX platform,after 'node app.js' will output some debug error info soon,say connect 127.0.0.1:6379 failure,it is because OSX's subprocess mechemist,redis-server will try severial times,in common situation,it is not a core problem.
+
+#####################
+#####################
+  nohm model
+#####################
+#####################
+
+step1,write coffees/md-<nohm-model>.coffee 
+step2,compile its result .js file into "./modules/" directory
+step3,"md-admin.js" will read this nohm model's definitions,dynamiclly load each attribute for views and other things.
+
+#####################
+#####################
+  bootstrap-wysiwyg
+#####################
+#####################
+
+git clone this project,put into './public/,so run 'tree ./public/bootstrap-wysiwyg/' will output:
+public/bootstrap-wysiwyg
+├── bootstrap-wysiwyg.js
+├── external
+│   ├── google-code-prettify
+│   │   ├── lang-apollo.js
+│   │   ├── lang-basic.js
+│   │   ├── lang-clj.js
+│   │   ├── lang-css.js
+│   │   ├── lang-tex.js
+│   │   ├── .... 
+│   │   ├── lang-vb.js
+│   │   ├── lang-vhdl.js
+│   │   ├── prettify.css
+│   │   ├── prettify.js
+│   │   └── run_prettify.js
+│   └── jquery.hotkeys.js
+├── index.css
+├── index.html
+├── LICENSE
+├── promo-868x350.png
+├── README.md
+└── republish.sh
+
+step2 ,make it localist:
+"mkdir ./public/font-awesome/font -p"
+"mkdir ./public/font-awesome/css "
+copy net file :
+then,run 'tree ./public/font-awesome/' will output
+public/font-awesome
+└── 3.0.2
+    ├── css
+    │   ├── font-awesome.css
+    │   ├── font-awesome-ie7.min.css
+    │   └── font-awesome.min.css
+    └── font
+        ├── *fontawesome-webfont.eot
+        ├── fontawesome-webfont.svg
+        ├── *fontawesome-webfont.ttf
+        └── *fontawesome-webfont.woff
+add  '*' sign means it is not included office site git  resposity,but use 'hacking' from example html's 'resources'(development view).
+curl download it ,one by one.
+till here,we localize bootstrap-wysiwyg,and font-awesome.
+
+step3)
+modified 'index' page for our purpose:disable the AD contents,links..,keep it clean and simple.
+
+step4)
+add this suit to our project.
+################## 
+################## 
+  browser
+################## 
+################## 
+
+create bare repository at tokyo host.
+clients get this repository by run "git clone tokyo:easti.git"(prepare your own .git/config)
+git clients now only dell laptop.
+make .gitignore,readme
+make a sketch of express site.
+
+
+
+coffee bin/staticify-jq-bt.coffee
+it will copy bootstrap and jquery,bootstrap must version 3,because its font support.
+
+//2018年 08月 08日 星期三 19:58:12 CST
+init level2,do:
+  try do a module-driven route,
+
+//Sat Aug 25 14:44:51 CST 2018
+ubuntu16.04LTS upgrade to 18.04.
+now the ubuntu18.04LTS-Hp-Desktop-PC joined.
+
+//Sat Aug 25 20:03:28 CST 2018
+views/index.pug,normalize ./app.js,run at development mode.
+make views/layouts directory.
+run test(initial),good.
+
+//Sun Aug 26 18:41:04 CST 2018
+initial level 2,target is 'mocha + tdd'
+
+//Wed Aug 29 16:11:52 CST 2018
+found what happen 'zombie6.x + mocha',no matter about each one,in fact,after i 'browser.html()' to see all output(it said '404 No Found'), i realized that,the route:'example.com' not correctly,instead it,shouldbe 'http://example.com/' or 'http://example.com',.
+now zombie is work well.
+
+
+affix original codes::
+(from accesspageiseasy.coffee)
+Browser = require 'zombie'
+Browser.localhost 'example.com',3003 
+browser = new Browser
+# sometimes it will help(below line)
+browser.waitDuration = '30s'
+describe 'zombie ability display::',->
+  describe 'access index page should success::',->
+    before ->
+      # !!NOT "browser.visit 'example.com'"  !!
+      browser.visit 'http://example.com'
+    it 'should access page successfully::',->
+      browser.assert.success()
+      console.log browser.html()
+    it 'should has 2 h4 tags::',->
+      browser.assert.elements 'h4',2
+    it 'page title is "you see you"::',->
+      browser.assert.text 'title','you see you' 
+
+//Fri Aug 31 10:23:47 CST 2018
+zuo men de shi fu lai J602 xiu men,hao le.
+refine the func-test case,add server.close() in after case.
+crreate a new alpha router.
+
+	//Fri Aug 31 12:08:08 CST 2018
+alpha router is good,but now need more:compress page content.
+
+//Sat Sep  1 11:31:15 CST 2018
+be careful of zombie browser.assert.attribute codes.
+even html element(s) has no attribue - name,the test will pass,no problem.
+if your target is check :
+1)elements(e.g. input elements)all have [name=] attrbute;
+2)and,[name=] not empty.
+
+actually,there are 2 task not 1,you first check 1) via:
+browser.assert.elements 'input[name]',2  # example,your form only 2 input fields
+be aware,not 'input' ,it is 'input[name]',to disable no name input field(s).
+
+then,do 2) via:
+browser.assert.attribute 'input','name',/\w+/
+
+#################### 
+#################### 
+  arm architecture 
+#################### 
+#################### 
+#//raspberry pi,and beaglebone is based on arm.
+#//initially,it has not 'sqlite3' software.if you run 'npm i --save sqlite3',node module(npm-sqlit3) will installed,but its sub directory './build/' will bare,no '.so' plugin.cause run app will failure.
+#//resolve way is first do 'sudo apt install sqlite3',then rerun 'npm i --save sqlite3'.
+#//after node-npy install sqlite3 module,check it: "require 'sqlite3'"
+above sounds wrong,today i use my pi3(not B+),from bare install the whole app 'git clone XXX' then 'npm i',it will automaticaly install all dependience modules include npm-sqlite3.
+after some while(5mins approx),run 'require sqlite3' successfully. check that if binary sqlite3 installed,said it not,but npm-sqlite3 still available,run the test script in ./share ok.
+so,it conclues that:it is no need anything just let node-pre-npy create module.before failures only because network delay,script cannt got the .tar,then timeout occurs.
+
+
+################## 
+################## 
+  createForm 
+################## 
+################## 
+in app,always need reused form.the form always from route's module.
+currently,resolve this task by defines (a function) in module,then route can invoke it,
+"md.getForm();"
+then,render to client with {fields:fields},which fields is module's field.
+notice that,something in .pug (view),parse field variable,need some tricks,see pugjs.org tuterials about 'interpolation of tag text'.
+
+#####################
+#####################
+  grunt 
+#####################
+#####################
+Problem 1:no this task(plugin) - mocha/mochatest/...?
+for mocha test,need grunt's plugin -- grunt-mocha-test (instead grunt-coffee-mocha),in <project>/Gruntfile.js:
+module.exports = function(grunt){
+  ['grunt-mocha-test',
+   ....
+  ].forEach(function(task){grunt.loadNpmTasks(task);});
+  grunt.initConfig({
+    ...
+    mochaTest:  //Notice That,'mocha-test' or 'mochatest' will failures,i waste many times on it.
+      all:{src:'qa/test-*.js'}
+   ...
+   });
+  //at last,register tasks.
+  grunt.registerTask('default',[
+    'mochaTest', // Need Same Name As Above.
+    'exec',
+    ...
+    ]);
+};
+ 
+  
+
+problem 2:sudo npm i -g grunt-cli failure.
+in linux ,it is easy to install grunt-cli as global,but in darwin(Apple MacBook),because i installed Node.js as .tar extracting,it is diffcult to 'global' install.
+instead,i obey net file teach me to install grunt-client as local(npm i --save-dev grunt-cli),then,add a soft link:
+  "ln -s /home/xxx/easti/node_modules/grunt/grunt-cli/bin/grunt /usr/local/bin/"
+now grunt command will found.
+
+
+currently:20190117,impletes:
+  1,exec:runserver --- node app.js &
+  2,exec:runredis --- redis-server <conf file> &
+  3,killserver -- 'pgrep node |xargs kill -15'
+  4,killredis --- 'redis-cli shutdown nosave'
+via grunt do the task(ever diffcult for me),first run redis-server,then run app.js,resolve order confuse.thanks,Grunt!
+
+
+#### #### #### ####
+grunt
+#### #### #### ####
+if run coffeescript after grunt installed,will find that coffeescript be locked at version 1.10.0,to fix this,re-install coffeescript latest version into devDependies via:
+"npm i --save-dev coffesscript"
+now run "coffee -v" will tells "2.3.2"
+in gruntjs office site,it said:
+[[[
+CoffeeScript
+Previously Gruntfiles could be wrote by default in CoffeeScript. That version of CoffeeScript has been and will be locked to ~1.10.0.
+
+Relying on your Gruntfile.coffee file to be automatically interpreted is now deprecated.
+
+If your Gruntfile is wrote in CoffeeScript, please additionally run npm install coffeescript --save-dev. This will allow you to use your preferred version of CoffeeScript and not be locked to the version installed with Grunt. In the next major version release of Grunt, the CoffeeScript dependency will be removed and it will be required to additionally npm install coffeescript to write your Gruntfiles in CoffeeScript.
+]]]
+
+conclusion:install module - 'grunt' will install 'coffeescript 1.10.0' too,this cause problem sometimes.
+
+#### #### #### ####
+  credential
+#### #### #### ####
+书中说“凭证的外化”,for not to explore to anyother,we suggest let .gitignore control this directory <project>/credentials/,in this dir,we keep our super user password,database connetion password and so on.
+
+#### #### #### #### #### #### #### ####
+  session + middleware(flash)
+#### #### #### #### #### #### #### ####
+in book - <web development with node and express>,writter said:
+(P93) 即显消息flash,也可以用查询url字符串来代替，但缺点一是太丑，二是不能做书签。另一种替代方式是使用会话来实现即显消息。
+我想比较一下使用两种方式在效率上的差别。第一种简称为会话，第二种简称查询。
+理论先做一个：
+会话：单次操作，
+1,需要定义一个函数，作为app.use的中间件。
+2,需要在业务页set up session object,then redirect to login get page(not post page,attention!)
+3,need login get page's view template add codes "if hasSessionObject then setup hidden-type field(example name=referrer) display html tag..."
+4,need login post code block adds "{referrer,...},redirect 303,referrer. 
+多次操作
+1,再不需要单次操作中的1,可以重用
+2,需要在业务页set up session object,then redirect to login get page(not post page,attention!)
+3,再不需要单次操作中的3,可以重用
+4,need login post code block adds "{referrer,...},redirect 303,referrer. 
+
+如果N个路由需要即时消息，那么步骤数为2N+2
+再来看一看使用查询的方式
+单次
+1,业务页经判断需要LOGIN时，重定向URL，URL附上参数
+2,LOGIN  GET PAGE 提供表单，增加HIDDEN域
+3,LOGIN POST PAGE 论证成功之后，重定向到原业务页（根据解析HIDDEN域)
+so,way2 N route=3N
+so,if few routes,way2 will efficeail few.
+
+#######################
+  Javascript With SVG 
+#######################
+if svg is outter svg file(images/svg+xml),and javascript codes is at outside(not within svg file!),communicate way is :
+  (first) include svg :
+     <object id="wrapper" width="xxx" height="xxxx" alt="xx xx xx" data="/src/to/svg-file">
+        ``` place fallback things here. ````
+     </object>
+  object/embed/iframe can act as wrapper of svg file.
+  (then,js comming)
+  var wrapper = document.getElementById("wrapper");
+  var svgDocument = wrapper.getSVGDocument();
+  var svgPathElement = svgDocument.getElementById('i-am-path-element');
+  ```` js code manipulate svg element(s) ````
+  (import!)should invoke js codes after html dom and svg dom all loaded,so,the best way is:
+    window.addEventListener('load',function(){
+       ```` the real codes ```
+      },true);
+   if use 'getSVGDocument()' before ALL loaded,browser will say it is a forbidden operator.
+if svg is inner and js is within html (not within svg)
+   js directly access svg element,not need window loaded event trigger.,and no need getSVGDocument(). 
+if svg is inner and js code within this svg
+   not need (would be wrong) use getSVGDocument() and no need wait loadend event,and window global variable is available.(etc window.setTimeout) 
+
+################
+################
+  git push tags
+################
+git push origin --tags
+will push all local tags to remote git resposity
+
+
+##############
+ tokyo problem
+##############
+this day,change git resposity from tokyo to github.com.something need give attentions:
+1,ssh key for github.com,remove its protect passphrase if it already exits,via:"ssh-keygen -p -f <file-to-this-key>";
+2,the key need remove its protect passphrase;
+3,change .ssh/config ,give HOST SETUP
+4,change origin:
+   git remote add origin <new-git-account>
+   (then) git push -u <new-git-account>
+   both 2 commands are from github.com help.
+
+#####################
+#####################
+  v4 font:open-iconic 
+#####################
+#####################
+from bootstrap4,default glyphicons gone,a "open-iconic" font instead,
+prepare directory -- ./public/bootstrap/open-iconic
+its structor like below:
+public/bootstrap/open-iconic
+├── css
+│   └── open-iconic-bootstrap.min.css
+└── fonts
+    ├── open-iconic.eot
+    ├── open-iconic.otf
+    ├── open-iconic.svg
+    ├── open-iconic.ttf
+    └── open-iconic.woff
+
+2 directories, 6 files
+
+abey below steps:
+1 "npm i --save open-iconic" (then mkdir public/bootstrap/open-iconic)
+2 "cp ./node_modules/open-iconic/font/fonts public/bootstrap/open-iconic/  -ra"
+3 "cp ./node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css public/bootstrap/open-iconic/css/"
+4 (in .html/.pug codes) <span class="oi oi-cloud-upload"></span>
+the icon will displays.
+
+############################
+ ticket schema(all fields)
+############################
+(sample)
+field:urge
+value 0
+field:"resolved" 
+value:false
+field:"title"
+value: chen op o kon gg 
+field:"category"
+value:tool
+field:"visits"
+value:0
+field:"ticket"
+value: chao cuan fans minion how to record audio? 
+field:"client_time"
+value: Thu Jun 27 2019 07:58:19 GMT+0800 (CST)
+field:"admin_alias"
+value: "fool"
+field:"ticket_id"
+value: 2
+(optional)
+field:"media"
+value:"/ticket_root/url-to-media"
+field:"update-time"
+value:new Date()
