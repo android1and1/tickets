@@ -26,6 +26,6 @@ module.exports = (grunt)->
         cmd:'redis-cli -a ' + auth_pass + ' shutdown nosave 2> /dev/null'
       runserver:
         cmd:'sleep 2 && node ./bin/www.js &'
-  #grunt.registerTask 'default',['simplemocha','exec']
+  grunt.registerTask 'mocha',['simplemocha']
   grunt.registerTask 'default',['exec:runredis','exec:runserver']
   grunt.registerTask 'killAll',['exec:killserver','exec:killredis']
