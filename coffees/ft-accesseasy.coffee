@@ -19,13 +19,7 @@ describe 'zombie ability display::',->
       browser.assert.success()
       #No Need This Time
       #console.log browser.html()
-    it 'should has 2 h4 tags::',->
-      browser.assert.elements 'h4',2
-    it 'page title is "I see You"::',->
-      browser.assert.text 'title','I see You' 
-  describe 'access alpha route test page(alpha-1) should success::',->
-    before ->
-      browser.visit 'http://example.com/alpha/alpha-1'
-    it 'should access access successfully::',->
-      browser.assert.success()
-      browser.assert.status 200
+    it 'this page has more than 10 link tags::',->
+      browser.assert.elements 'a',{atleast:10}
+    it 'page title is "welcome-daka"::',->
+      browser.assert.text 'title','welcome-daka' 

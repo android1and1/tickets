@@ -482,3 +482,9 @@ field:"media"
 value:"/ticket_root/url-to-media"
 field:"update-time"
 value:new Date()
+
+#####################################
+  functional test
+#####################################
+run 'mocha functional-test/ft-<the test script>.js'
+should run above after redis-server start.
