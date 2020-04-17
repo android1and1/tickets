@@ -1096,7 +1096,7 @@ _save_one_ticket = (req,res,form,redis)->
           # successfully
           return res.render 'admin-save-ticket-success.pug',{ticket_id:number,reply:reply,title:'Stored Success'}
 
-# help function - 'retreves',for retreves ticket by its first argument.
+# help function - 'retrieves',for retrieves ticket by its first argument.
 _retrieves = (keyname,sortby)->
   promise = new Promise (resolve,reject)-> 
     redis.keys keyname,(err,list)->
