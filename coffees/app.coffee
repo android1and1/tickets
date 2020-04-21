@@ -687,6 +687,20 @@ app.post '/admin/disable-user',(req,res)->
     }
     res.json {code:-1,reason:reason}
     
+app.all '/admin/dynamic-indexes',(req,res)->
+  if req.session?.auth?.role isnt 'admin'
+    req.session.referrer = '/admin/dynamic-indexes'
+    return res.redirect 303,'/admin/login'
+  if req.method is 'GET' 
+    res.render 'select-range.pug'
+  else
+    {start,end} = req.body
+    max = await getAsync(TICKET_PREFIX + ':counter')
+    console.log '(max:' + max + ')'
+    if max < end
+      return res.json {'has':'false'}
+    else
+      return res.json {'has':'true'}
 app.put '/admin/del-user',(req,res)->
   ins = await Nohm.factory 'account'
   # req.query.id be transimit from '/admin/list-users' page.  
