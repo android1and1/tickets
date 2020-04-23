@@ -1081,26 +1081,46 @@
     }
   });
 
-  app.all('/admin/dynamic-indexes', async function(req, res) {
-    var end, max, ref, ref1, start;
+  app.all('/admin/dynamic-indexes', function(req, res) {
+    var end, error, o, range, ref, ref1, start;
     if (((ref = req.session) != null ? (ref1 = ref.auth) != null ? ref1.role : void 0 : void 0) !== 'admin') {
       req.session.referrer = '/admin/dynamic-indexes';
       return res.redirect(303, '/admin/login');
     }
     if (req.method === 'GET') {
-      return res.render('select-range.pug');
+      range = parseInt(req.query.range);
+      return redis.keys('ticket:hash*', async function(err, list) {
+        var item, j, len, o, results;
+        if (err) {
+          return res.render('range-list.pug', {
+            error: err.message
+          });
+        }
+        results = [];
+        list = list.sort(function(a, b) {
+          return b.ticket_id - a.ticket_id;
+        });
+        list = list.slice(0, +range + 1 || 9e9);
+        for (j = 0, len = list.length; j < len; j++) {
+          item = list[j];
+          o = (await hgetallAsync(item));
+          results.push(['#', o.ticket_id, ':', o.title].join(''));
+        }
+        return res.render('range-list.pug', {
+          thelist: results // IN "POST" CASE
+        });
+      });
     } else {
       ({start, end} = req.body);
-      max = (await getAsync(TICKET_PREFIX + ':counter'));
-      console.log('(max:' + max + ')');
-      if (max < end) {
-        return res.json({
-          'has': 'false'
-        });
-      } else {
-        return res.json({
-          'has': 'true'
-        });
+      o = {};
+      try {
+        o.start = start;
+        return o.end = end;
+      } catch (error1) {
+        error = error1;
+        return o.error = 'true';
+      } finally {
+        res.render('range-list', o);
       }
     }
   });

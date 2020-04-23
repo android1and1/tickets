@@ -1,0 +1,10 @@
+extend layouts/main
+block content
+  include  widgets/tickets-common-navigator.pug
+  h2.display-3 &nbsp;
+  h1 Range List
+  if error
+    h3= error
+  if thelist
+    each item in thelist
+      h3= item 

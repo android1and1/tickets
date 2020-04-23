@@ -14,8 +14,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
       li.nav-item.dropdown
         a(class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown") 按Range列表 
         div.dropdown-menu
-          a.dropdown-item(href="/admin/dynamic-indexes?start=-100&end=-1") last 1~100 
-          a.dropdown-item(href="/admin/dynamic-indexes?start=-200&end=-99") last 101~200 
+          a.dropdown-item(href="/admin/dynamic-indexes?range=100") last:1~100 
+          a.dropdown-item(href="/admin/dynamic-indexes?range=200") last:101~200 
           .dropdown-divider
           small(id="helptext" class="form-text text-muted")
             | 输入范围（数字）

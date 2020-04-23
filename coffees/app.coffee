@@ -697,15 +697,27 @@ app.all '/admin/dynamic-indexes',(req,res)->
     req.session.referrer = '/admin/dynamic-indexes'
     return res.redirect 303,'/admin/login'
   if req.method is 'GET' 
-    res.render 'select-range.pug'
-  else
+    range = parseInt req.query.range
+    redis.keys 'ticket:hash*',(err,list)->
+      return res.render 'range-list.pug',{error: err.message} if err
+      results = []
+      list = list.sort (a,b)->
+        b.ticket_id - a.ticket_id
+      list = list[0..range] 
+      for item in list
+        o = await hgetallAsync item
+        results.push ['#',o.ticket_id,':',o.title].join('')
+      return res.render 'range-list.pug',{thelist:results}
+  else # IN "POST" CASE
     {start,end} = req.body
-    max = await getAsync(TICKET_PREFIX + ':counter')
-    console.log '(max:' + max + ')'
-    if max < end
-      return res.json {'has':'false'}
-    else
-      return res.json {'has':'true'}
+    o = {}
+    try
+      o.start = start 
+      o.end = end
+    catch error
+      o.error = 'true'  
+    finally
+      res.render 'range-list',o
 app.put '/admin/del-user',(req,res)->
   ins = await Nohm.factory 'account'
   # req.query.id be transimit from '/admin/list-users' page.  
