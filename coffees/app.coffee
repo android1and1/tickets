@@ -137,6 +137,11 @@ app.get '/',(req,res)->
     role:role
     alias:alias
 
+app.get '/alpha/:tpl',(req,res)->
+  tpl = req.params.tpl  # client send /alpha?tpl=something
+  # Notice:all template in views/alpha,use layout via "../layouts"
+  res.render 'alpha/' + tpl,{'title':'Alpha!'}
+
 app.get '/create-check-words',(req,res)->
   # 如果用户选择了填表单方式来打卡。
   digits = [48..57] # 0..9

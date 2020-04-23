@@ -202,6 +202,15 @@
     });
   });
 
+  app.get('/alpha/:tpl', function(req, res) {
+    var tpl;
+    tpl = req.params.tpl; // client send /alpha?tpl=something
+    // Notice:all template in views/alpha,use layout via "../layouts"
+    return res.render('alpha/' + tpl, {
+      'title': 'Alpha!'
+    });
+  });
+
   app.get('/create-check-words', async function(req, res) {
     var _, alpha, chars, digits, index, random, ref, round, words;
     // 如果用户选择了填表单方式来打卡。
