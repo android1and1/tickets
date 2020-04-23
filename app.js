@@ -1081,8 +1081,8 @@
     }
   });
 
-  app.all('/admin/dynamic-indexes', function(req, res) {
-    var end, error, o, range, ref, ref1, start;
+  app.all('/admin/dynamic-indexes', async function(req, res) {
+    var current, end, range, ref, ref1, results, start;
     if (((ref = req.session) != null ? (ref1 = ref.auth) != null ? ref1.role : void 0 : void 0) !== 'admin') {
       req.session.referrer = '/admin/dynamic-indexes';
       return res.redirect(303, '/admin/login');
@@ -1098,7 +1098,10 @@
         }
         results = [];
         list = list.sort(function(a, b) {
-          return b.ticket_id - a.ticket_id;
+          var aid, bid;
+          aid = parseInt(a.split(":")[3]);
+          bid = parseInt(b.split(":")[3]);
+          return bid - aid;
         });
         list = list.slice(0, +range + 1 || 9e9);
         for (j = 0, len = list.length; j < len; j++) {
@@ -1107,20 +1110,47 @@
           results.push(['#', o.ticket_id, ':', o.title].join(''));
         }
         return res.render('range-list.pug', {
+          title: 'Range List',
           thelist: results // IN "POST" CASE
         });
       });
     } else {
-      ({start, end} = req.body);
-      o = {};
-      try {
-        o.start = start;
-        return o.end = end;
-      } catch (error1) {
-        error = error1;
-        return o.error = 'true';
-      } finally {
-        res.render('range-list', o);
+      start = parseInt(req.body.start);
+      end = parseInt(req.body.end);
+      current = (await getAsync(TICKET_PREFIX + ':counter'));
+      current = parseInt(current);
+      results = [];
+      if (end > current) {
+        return results.push('Warning:Querying Range Exceed.');
+      } else {
+        return redis.keys('ticket:hash*', async function(err, list) {
+          var j, len, one, tid;
+          list = list.filter(function(item) {
+            var num;
+            num = parseInt(item.split(":")[3]);
+            if (num > end) {
+              return false;
+            } else if (num < start) {
+              return false;
+            }
+            return true;
+          });
+          list = list.sort(function(a, b) {
+            var aid, bid;
+            aid = parseInt(a.split(":")[3]);
+            bid = parseInt(b.split(":")[3]);
+            return bid - aid;
+          });
+          for (j = 0, len = list.length; j < len; j++) {
+            tid = list[j];
+            one = (await hgetallAsync(tid));
+            results.push(['#', one.ticket_id, ':', one.title].join(''));
+          }
+          return res.render('range-list.pug', {
+            thelist: results,
+            title: 'Range List'
+          });
+        });
       }
     }
   });

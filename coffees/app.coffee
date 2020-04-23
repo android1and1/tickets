@@ -702,22 +702,39 @@ app.all '/admin/dynamic-indexes',(req,res)->
       return res.render 'range-list.pug',{error: err.message} if err
       results = []
       list = list.sort (a,b)->
-        b.ticket_id - a.ticket_id
+        aid = parseInt a.split(":")[3]
+        bid = parseInt b.split(":")[3]
+        bid - aid
       list = list[0..range] 
       for item in list
         o = await hgetallAsync item
         results.push ['#',o.ticket_id,':',o.title].join('')
-      return res.render 'range-list.pug',{thelist:results}
+      return res.render 'range-list.pug',{title:'Range List',thelist:results}
   else # IN "POST" CASE
-    {start,end} = req.body
-    o = {}
-    try
-      o.start = start 
-      o.end = end
-    catch error
-      o.error = 'true'  
-    finally
-      res.render 'range-list',o
+    start = parseInt req.body.start
+    end = parseInt req.body.end
+    current = await getAsync(TICKET_PREFIX + ':counter')
+    current = parseInt current
+    results = [] 
+    if end > current
+      results.push 'Warning:Querying Range Exceed.'
+    else
+      redis.keys 'ticket:hash*',(err,list)->
+        list = list.filter (item)->
+          num = parseInt item.split(":")[3]
+          if num > end
+            return false
+          else if num < start
+            return false
+          true
+        list = list.sort (a,b)->
+          aid = parseInt a.split(":")[3]
+          bid = parseInt b.split(":")[3]
+          bid - aid
+        for tid in list
+          one = await hgetallAsync tid 
+          results.push ['#',one.ticket_id,':',one.title].join('')
+        return res.render 'range-list.pug',{thelist:results,title:'Range List'}
 app.put '/admin/del-user',(req,res)->
   ins = await Nohm.factory 'account'
   # req.query.id be transimit from '/admin/list-users' page.  
