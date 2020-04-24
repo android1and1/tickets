@@ -4,7 +4,7 @@ block content
   h4.display-4 &nbsp;
   h4.text-center.display-4.text-success Range List
   if error
-    h3.warning= error
+    h3.my-4.p-2.border.bg-dark.text-center.text-warning= error
   if thelist
     .list-group.list-group-flush
       each item in thelist
@@ -13,7 +13,7 @@ block content
             h5.mb-1 id:#{item.ticket_id}
             h5.mb-1.text-warning 《#{item.title}》
             span.badge.badge-secondary visits: #{item.visits}
-          small 写于 #{item.client_time}
+          small.bd-highlight 写于 #{item.client_time}
           blockquote
             p #{item.ticket.split("\r\n")[0]}
 

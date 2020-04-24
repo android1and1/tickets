@@ -1115,7 +1115,7 @@
       current = (await getAsync(TICKET_PREFIX + ':counter'));
       current = parseInt(current);
       results = [];
-      if (end > current || (end - start) > 100) {
+      if ((start < 0) || (end < 0) || (end < start) || (end > current) || ((end - start) > 100)) {
         return res.render('admin-range-list', {
           error: 'Warning:Querying Range Exceed.',
           title: 'Range List'

@@ -715,7 +715,7 @@ app.all '/admin/dynamic-indexes',(req,res)->
     current = await getAsync(TICKET_PREFIX + ':counter')
     current = parseInt current
     results = [] 
-    if end > current or (end-start) > 100
+    if (start < 0) or (end < 0) or (end < start) or (end > current) or ((end-start) > 100)
       return res.render 'admin-range-list',{error:'Warning:Querying Range Exceed.',title:'Range List'}
     else
       redis.keys 'ticket:hash*',(err,list)->
