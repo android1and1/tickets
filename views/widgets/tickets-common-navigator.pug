@@ -1,14 +1,11 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-  a(class="navbar-brand text-warning" href="/admin/visits-base-tickets") hot! 
   a(class="navbar-brand text-danger" href="/admin/newest-ticket")  WhatIsNew? 
+  a(class="navbar-brand text-warning" href="/admin/visits-base-tickets") hot! 
   button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#supportedcontent")
     span(class="oi oi-menu")
   div.collapse.navbar-collapse(id="supportedcontent")
     form.form-inline(method="POST" action="/admin/ticket-details/" id="search_form")
-      .input-group
-        .input-group-prepend
-          span.input-group-text Ticket Id
-        input(type="text" name="ticket_id" class="form-control form-control-sm")
+      input(placeholder="Ticket Id,then Enter" type="text" name="ticket_id" class="form-control")
     ul.navbar-nav.mr-auto
       li.nav-item
         a.nav-link(href="/admin/create-new-ticket") create-new-ticket 
