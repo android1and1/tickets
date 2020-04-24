@@ -10,10 +10,10 @@ block content
       each item in thelist
         a.list-group-item.list-group-item-action(href= '/admin/get-ticket-by-id/' + item.ticket_id,alt="ticket item") 
           .d-flex.w-100.justify-content-between
-            h5.mb-1 id:#{item.ticket_id}
-            h5.mb-1.text-warning 《#{item.title}》
-            span.badge.badge-secondary visits: #{item.visits}
+            h5.mb-2 第#{item.ticket_id}号文章
+            span.badge.badge-success #{item.visits}
+          h4.text-center.mb-1.text-warning 《#{item.title}》
           small.bd-highlight 写于 #{item.client_time}
-          blockquote
+          blockquote.mt-3
             p #{item.ticket.split("\r\n")[0]}
 

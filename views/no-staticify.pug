@@ -2,6 +2,13 @@ extend layouts/main.pug
 block pagejs
   script(src="/pagejs/pagejs-remove-readed-audio.js")
 block content
+  nav(aria-label="breadcrumb")
+    ol(class="breadcrumb")
+      li(class="breadcrumb-item")
+        a(href="/admin/newest-ticket") Home 
+      li(class="breadcrumb-item")
+        a(href="/admin/create-new-ticket") Create New Ticket 
+      li(class="breadcrumb-item active" aria-current="page") Audioes 
   h3.display-2 #{title} 
   .container.w-100.m-0.p-0
     if(list && list.length !== 0)
