@@ -1,27 +1,19 @@
 extend ../layouts/main
 block pagecss
   style.
-    .row {
-      height:250px;
-      border:2px solid purple;
+    .yellow {
+      border:1px solid yellow;
+    }    
+    .purple {
+      border:1px solid purple;
     }    
 block content
-  h4 Express Can Redirect Programe 
-  // comment
-  .container
-    .row
-      .col.border.bg-light 1 of 2 
-      .col.border.bg-light 1 of 2 
-    .row
-      .col.border.bg-light 1 of 3 
-      .col.border.bg-dark 1 of 3 
-      .col.border.bg-light 1 of 3 
-    .row
-      .col.border col 
-      .col.border col 
-      .w-100.bg-success
-      .col.border col 
-    .row
-      .col.border 1 of 3 
-      .col.col-6.border 2 of 3 (wider) 
-      .col.border 3 of 3 
+  h2 在这里愉快地玩弄着bootstrap4
+  //- comment not within
+  // it is comment,be displayed in html codes.
+  div.purple.d-inline-flex.p-2
+    | I'm a flexbox container!
+  div.yellow.ml-4.d-inline-flex.p-2
+    | (Too)I'm a flexbox container!
+  div.border.bd-highlight.mx-auto.d-flex.p-4.flex-row-reverse
+    p.text-align-right 我们不一样！ 

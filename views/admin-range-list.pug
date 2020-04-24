@@ -1,0 +1,19 @@
+extend layouts/main
+block content
+  include  widgets/tickets-common-navigator.pug
+  h4.display-4 &nbsp;
+  h4.text-center.display-4.text-success Range List
+  if error
+    h3.warning= error
+  if thelist
+    .list-group.list-group-flush
+      each item in thelist
+        a.list-group-item.list-group-item-action(href= '/admin/get-ticket-by-id/' + item.ticket_id,alt="ticket item") 
+          .d-flex.w-100.justify-content-between
+            h5.mb-1 id:#{item.ticket_id}
+            h5.mb-1.text-warning 《#{item.title}》
+            span.badge.badge-secondary visits: #{item.visits}
+          small 写于 #{item.client_time}
+          blockquote
+            p #{item.ticket.split("\r\n")[0]}
+

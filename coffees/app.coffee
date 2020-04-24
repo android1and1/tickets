@@ -699,25 +699,24 @@ app.all '/admin/dynamic-indexes',(req,res)->
   if req.method is 'GET' 
     range = parseInt req.query.range
     redis.keys 'ticket:hash*',(err,list)->
-      return res.render 'range-list.pug',{error: err.message} if err
       results = []
       list = list.sort (a,b)->
         aid = parseInt a.split(":")[3]
         bid = parseInt b.split(":")[3]
         bid - aid
-      list = list[0..range] 
+      list = list[0..range] # slice
       for item in list
         o = await hgetallAsync item
-        results.push ['#',o.ticket_id,':',o.title].join('')
-      return res.render 'range-list.pug',{title:'Range List',thelist:results}
+        results.push o 
+      return res.render 'admin-range-list.pug',{title:'Range List',thelist:results}
   else # IN "POST" CASE
     start = parseInt req.body.start
     end = parseInt req.body.end
     current = await getAsync(TICKET_PREFIX + ':counter')
     current = parseInt current
     results = [] 
-    if end > current
-      results.push 'Warning:Querying Range Exceed.'
+    if end > current or (end-start) > 100
+      return res.render 'admin-range-list',{error:'Warning:Querying Range Exceed.',title:'Range List'}
     else
       redis.keys 'ticket:hash*',(err,list)->
         list = list.filter (item)->
@@ -732,9 +731,9 @@ app.all '/admin/dynamic-indexes',(req,res)->
           bid = parseInt b.split(":")[3]
           bid - aid
         for tid in list
-          one = await hgetallAsync tid 
-          results.push ['#',one.ticket_id,':',one.title].join('')
-        return res.render 'range-list.pug',{thelist:results,title:'Range List'}
+          o = await hgetallAsync tid 
+          results.push o 
+        return res.render 'admin-range-list',{thelist:results,title:'Range List'}
 app.put '/admin/del-user',(req,res)->
   ins = await Nohm.factory 'account'
   # req.query.id be transimit from '/admin/list-users' page.  
@@ -1144,7 +1143,7 @@ _save_one_ticket = (req,res,form,redis)->
           # successfully
           return res.render 'admin-save-ticket-success.pug',{ticket_id:number,reply:reply,title:'Stored Success'}
 
-# help function - 'retrieves',for retrieves ticket by its first argument.
+# help function  'retrieves',for retrieves ticket by its first argument.
 _retrieves = (keyname,sortby)->
   promise = new Promise (resolve,reject)-> 
     redis.keys keyname,(err,list)->

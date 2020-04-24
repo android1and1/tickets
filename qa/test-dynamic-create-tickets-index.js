@@ -17,34 +17,38 @@
         'password': '1234567'
       }).expect(303);
     });
-    describe('route GET /admin/dynamic-indexes::', function() {
-      var any;
-      any = void 0;
-      before(function() {
-        return any = agent.get('/admin/dynamic-indexes');
-      });
-      it('should access ok without auth::', function() {
-        return any.expect('Content-Type', 'text/html; charset=utf-8').expect(200);
-      });
-      return it('should get a page content::', function() {
-        return any.then(function(res) {
+    describe('route GET /admin/dynamic-indexes?range=100::', function() {
+      return it('after authentication,agent access this route should be ok::', function() {
+        return agent.get('/admin/dynamic-indexes').expect('Content-Type', 'text/html; charset=utf-8').expect(200).then(function(res) {
           var $;
           $ = cheerio.load(res.text);
-          // has head1 text is 'Select tickets range' 
-          assert.equal($('h1').text(), 'Select Tickets Range');
-          // has one form,2 input fields,one is 'start',another is 'end'
-          assert.equal($('form [name=start]').length, 1);
-          return assert.equal($('form [name=end]').length, 1);
+          // has head1 text is 'Range List' 
+          assert.equal($('h1').text(), 'Range List');
+          // because invalid range,server send no list,view display none
+          return assert.equal($('.list-group').length, 0);
+        });
+      });
+    });
+    describe('if query is invalidString responses also has waringing:', function() {
+      return it('get via query range=invalid should get warning::', function() {
+        return agent.get('/admin/dynamic-indexes?range=invalid', function() {}).expect(200).then(function(res) {
+          var $;
+          $ = cheerio.load(res.text);
+          // has .warning element in this DOM.
+          return assert.equal(1, $('.warning').length);
         });
       });
     });
     return describe('route POST /admin/dynamic-indexes::', function() {
       return it('post the form will get response(json)::', function() {
         return agent.post('/admin/dynamic-indexes').type('form').send({
-          start: 100,
-          end: 300
+          start: 300,
+          end: 550
         }).expect(200).then(function(res) {
-          return assert.equal('true', res.body.has);
+          var $;
+          // this time ,response titles will more than 200
+          $ = cheerio.load(res.text);
+          return assert.ok($('.list-group-item').length > 200);
         });
       });
     });

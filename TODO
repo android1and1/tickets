@@ -1011,3 +1011,13 @@ Wed 15 Apr 11:18:33 CST 2020
 vm-ubuntu16-server
 Wed Apr 15 13:29:14 CST 2020
   today,a new user add in this project - virtual machine - ubuntu16 managed via VMWare workstation pro 15.5.
+
+jp_Stretch_Pi3
+Fri 24 Apr 10:25:31 CST 2020
+  我觉察出当今一个重大的变化，发生在bootstrap，它的最新版本包含了新的ＷＥＢ编程方向。于是，我决定本日就更新我模板底层所引用的bootstrap.min.css和bootstrap.min.js.
+  i thinks it is the point should update bootstrap to its newest version - 4.4.
+  (after somewhile,things...)
+  bootstrip module(not cdn)still at level:4.3.x,bootstrip module want funding...
+  so,i reback to 4.3,via cp ./node_modules/bootstrap/dist/css/bootstrap.min.css public/bootstrap/
+  also bootstrap js file.
+  during update event,i check coffeescript again,the newest coffeescript version is 2.5.1,its changelog said coffeescript now support ECMAScript 6(or 7?),async function,generator,fixed argument value,splats...and so on.i update coffeescipt at pi2,and try a little script about fixed value argument,it works.

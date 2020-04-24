@@ -12,9 +12,6 @@
     before(function() {
       return agent = request('http://localhost:3003');
     });
-    it('should access first page successfully::', function() {
-      return agent.get('/').expect(200);
-    });
     return it('should access first page successfully::', function() {
       return agent.get('/').then(function(res) {
         return assert.notEqual(-1, res.text.indexOf('placeholder'));
@@ -29,9 +26,6 @@
   });
 
   describe('authenticate test::', function() {
-    after(function() {
-      return process.exit(0);
-    });
     return it('should be redirected if authenticate successful::', function() {
       return agent.post('/admin/login').send('alias=fool&password=1234567').expect(303);
     });

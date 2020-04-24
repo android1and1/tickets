@@ -1091,11 +1091,6 @@
       range = parseInt(req.query.range);
       return redis.keys('ticket:hash*', async function(err, list) {
         var item, j, len, o, results;
-        if (err) {
-          return res.render('range-list.pug', {
-            error: err.message
-          });
-        }
         results = [];
         list = list.sort(function(a, b) {
           var aid, bid;
@@ -1107,9 +1102,9 @@
         for (j = 0, len = list.length; j < len; j++) {
           item = list[j];
           o = (await hgetallAsync(item));
-          results.push(['#', o.ticket_id, ':', o.title].join(''));
+          results.push(o);
         }
-        return res.render('range-list.pug', {
+        return res.render('admin-range-list.pug', {
           title: 'Range List',
           thelist: results // IN "POST" CASE
         });
@@ -1120,11 +1115,14 @@
       current = (await getAsync(TICKET_PREFIX + ':counter'));
       current = parseInt(current);
       results = [];
-      if (end > current) {
-        return results.push('Warning:Querying Range Exceed.');
+      if (end > current || (end - start) > 100) {
+        return res.render('admin-range-list', {
+          error: 'Warning:Querying Range Exceed.',
+          title: 'Range List'
+        });
       } else {
         return redis.keys('ticket:hash*', async function(err, list) {
-          var j, len, one, tid;
+          var j, len, o, tid;
           list = list.filter(function(item) {
             var num;
             num = parseInt(item.split(":")[3]);
@@ -1143,10 +1141,10 @@
           });
           for (j = 0, len = list.length; j < len; j++) {
             tid = list[j];
-            one = (await hgetallAsync(tid));
-            results.push(['#', one.ticket_id, ':', one.title].join(''));
+            o = (await hgetallAsync(tid));
+            results.push(o);
           }
-          return res.render('range-list.pug', {
+          return res.render('admin-range-list', {
             thelist: results,
             title: 'Range List'
           });
@@ -1821,7 +1819,7 @@
     });
   };
 
-  // help function - 'retrieves',for retrieves ticket by its first argument.
+  // help function  'retrieves',for retrieves ticket by its first argument.
   _retrieves = function(keyname, sortby) {
     var promise;
     promise = new Promise(function(resolve, reject) {
