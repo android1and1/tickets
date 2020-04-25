@@ -698,6 +698,8 @@ app.all '/admin/dynamic-indexes',(req,res)->
     return res.redirect 303,'/admin/login'
   if req.method is 'GET' 
     range = parseInt req.query.range
+    if (range isnt 100) and (range isnt 200)
+      return res.render 'admin-range-list',{error:'Warning:Invalid Query.',title:'Range List'}
     redis.keys 'ticket:hash*',(err,list)->
       results = []
       list = list.sort (a,b)->
@@ -712,10 +714,13 @@ app.all '/admin/dynamic-indexes',(req,res)->
   else # IN "POST" CASE
     start = parseInt req.body.start
     end = parseInt req.body.end
+    if start isnt -(-start) or end isnt -(-end)
+      return res.render 'admin-range-list',{error:'Warning:Querying Range Exceed.',title:'Range List'}
+    console.dir {start,end}
     current = await getAsync(TICKET_PREFIX + ':counter')
     current = parseInt current
     results = [] 
-    if (start < 0) or (end < 0) or (end < start) or (end > current) or ((end-start) > 100)
+    if (start < 0) or (end <= 0) or (end <= start) or (end > current) or ((end-start) > 100)
       return res.render 'admin-range-list',{error:'Warning:Querying Range Exceed.',title:'Range List'}
     else
       redis.keys 'ticket:hash*',(err,list)->

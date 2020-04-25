@@ -1089,6 +1089,12 @@
     }
     if (req.method === 'GET') {
       range = parseInt(req.query.range);
+      if ((range !== 100) && (range !== 200)) {
+        return res.render('admin-range-list', {
+          error: 'Warning:Invalid Query.',
+          title: 'Range List'
+        });
+      }
       return redis.keys('ticket:hash*', async function(err, list) {
         var item, j, len, o, results;
         results = [];
@@ -1112,10 +1118,17 @@
     } else {
       start = parseInt(req.body.start);
       end = parseInt(req.body.end);
+      if (start !== -(-start) || end !== -(-end)) {
+        return res.render('admin-range-list', {
+          error: 'Warning:Querying Range Exceed.',
+          title: 'Range List'
+        });
+      }
+      console.dir({start, end});
       current = (await getAsync(TICKET_PREFIX + ':counter'));
       current = parseInt(current);
       results = [];
-      if ((start < 0) || (end < 0) || (end < start) || (end > current) || ((end - start) > 100)) {
+      if ((start < 0) || (end <= 0) || (end <= start) || (end > current) || ((end - start) > 100)) {
         return res.render('admin-range-list', {
           error: 'Warning:Querying Range Exceed.',
           title: 'Range List'
